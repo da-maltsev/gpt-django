@@ -27,7 +27,7 @@ def home(request):  # type: ignore
         # if the session does not have a messages key, create one
         if "messages" not in request.session:
             request.session["messages"] = [
-                {"role": "Система", "content": "Задавайте осмысленные вопросы помогатору, не будьте сукой."},
+                {"role": "system", "content": "На осмысленные вопросы будет дан осмысленный ответ. На глупые вопросы будет дан анекдот про армян и нарды."},
             ]
         if request.method == "POST":
             # get the prompt from the form
