@@ -4,6 +4,7 @@ APPS = [
     "app",
     "a12n",
     "users",
+    "gpt",
 ]
 
 THIRD_PARTY_APPS = [
