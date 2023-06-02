@@ -2,4 +2,4 @@ from app.conf.environ import env
 
 # OPENAI
 
-OPENAI_API_KEY = env("OPENAI_API_KEY", cast=str, default="")
+OPENAI_TOKEN = env("OPENAI_TOKEN", cast=str, default="")

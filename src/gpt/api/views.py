@@ -7,7 +7,7 @@ from django.shortcuts import render
 
 # import the generated API key from the secret_key file
 # loading the API key from the secret_key file
-openai.api_key = settings.OPENAI_API_KEY  # type: ignore[misc]
+openai.api_key = settings.OPENAI_TOKEN  # type: ignore[misc]
 
 
 def new_chat(request):  # type: ignore

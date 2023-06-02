@@ -117,6 +117,8 @@ requests==2.28.2
     #   openai
 sentry-sdk==1.14.0
     # via gpt-django (pyproject.toml)
+six==1.16.0
+    # via gpt-django (pyproject.toml)
 sqlparse==0.4.3
     # via django
 tqdm==4.65.0

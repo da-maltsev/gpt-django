@@ -75,3 +75,75 @@ jobs:
           . venv/bin/activate
           cp src/app/.env.ci src/app/.env
           make test
+  build-docker-image:
+    needs: test
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        id: setup-python
+        with:
+          python-version-file: '.python-version'
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Store default environment file to be runnable at the developer machine
+        run: cp src/.env.example src/.env
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate image identifier
+        id: image
+        uses: ASzc/change-string-case-action@v1
+        with:
+          string: ${{ github.repository }}
+
+      - name: Build image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: ${{ github.ref == 'refs/heads/master' }}
+          tags: |
+            ghcr.io/${{ steps.image.outputs.lowercase }}:latest
+            ghcr.io/${{ steps.image.outputs.lowercase }}:${{ github.sha }}
+          build-args: |
+            PYTHON_VERSION=${{ steps.setup-python.outputs.python-version }}
+            RELEASE=${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-docker-image
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read image identifiers
+        id: image
+        uses: ASzc/change-string-case-action@v1
+        with:
+          string: ${{ github.repository }}
+
+      - name: Update image
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          script: |
+            docker rm $(docker ps -a | grep '${{ steps.image.outputs.lowercase }}' | awk '{print $1}')
+            docker rmi $(docker images | grep '${{ steps.image.outputs.lowercase }}')
+            docker pull ghcr.io/${{ steps.image.outputs.lowercase }}:latest
+            docker run -d -e OPENAI_TOKEN=${{ secrets.OPENAI_TOKEN }} SECRET_KEY=${{ secrets.SECRET_KEY }} ghcr.io/${{ steps.image.outputs.lowercase }}
