@@ -32,9 +32,9 @@ RUN ./manage.py collectstatic --noinput
 RUN ./manage.py migrate
 
 ARG RELEASE=dev-untagged
-ENV SENTRY_RELEASE ${RELEASE}
-ENV DD_VERSION ${RELEASE}
+#ENV SENTRY_RELEASE ${RELEASE}
 
 USER root
 
-CMD uwsgi --master --http :8000 --module app.wsgi --workers 1 --threads 1 --harakiri 25 --max-requests 500 --log-x-forwarded-for --buffer-size 32000
+CMD uwsgi --master --http 0.0.0.0:8000 --module app.wsgi --workers 1 --threads 1 --harakiri 25 --max-requests 500 --log-x-forwarded-for --buffer-size 32000
+#CMD ./manage.py runserver 0.0.0.0:8000
