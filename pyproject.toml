@@ -21,6 +21,7 @@ dependencies = [
     "sentry-sdk",
     "Pillow",
     "psycopg2-binary",
+    "openai",
 ]
 
 

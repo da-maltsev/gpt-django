@@ -26,6 +26,7 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": env("PAGE_SIZE", cast=int, default=20),
     "DEFAULT_THROTTLE_RATES": {
         "anon-auth": "10/min",
+        "anon": "5/min",
     },
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
