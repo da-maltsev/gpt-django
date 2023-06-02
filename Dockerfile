@@ -29,6 +29,7 @@ ADD src /src
 
 RUN ./manage.py compilemessages
 RUN ./manage.py collectstatic --noinput
+RUN ./manage.py migrate
 
 ARG RELEASE=dev-untagged
 ENV SENTRY_RELEASE ${RELEASE}
