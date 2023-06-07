@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  db:
+    container_name: postgres
+    image: postgres:13.2-alpine
+    command: postgres
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-postgres}
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    restart: unless-stopped
+
+  app:
+    image: ghcr.io/da-maltsev/gpt-django:latest
+    container_name: backend
+    environment:
+      - DATABASE_URL=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db/${POSTGRES_DB:-postgres}
+      - SECRET_KEY=${SECRET_KEY}
+      - OPENAI_TOKEN=${OPENAI_TOKEN}
+    command: >
+      sh -c "./manage.py migrate &&
+             uwsgi --master --http 0.0.0.0:8000 --module app.wsgi --workers 1 --threads 1 --harakiri 25 --max-requests 500 --log-x-forwarded-for --buffer-size 32000"
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    restart: unless-stopped
+
+
+volumes:
+  postgres_data:
