@@ -9,6 +9,7 @@ app_name = "gpt"
 # a list of all the urls
 urlpatterns = [
     path("", views.home, name="home"),
-    path("new_chat/", views.new_chat, name="new_chat"),
+    path("ask-gpt/", views.ask_gpt, name="ask_gpt"),
+    path("new-chat/", views.new_chat, name="new_chat"),
     path("error-handler/", views.error_handler, name="error_handler"),
 ]
