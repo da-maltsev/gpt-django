@@ -18,6 +18,7 @@ SITE_ID = 1
 include(
     "conf/api.py",
     "conf/auth.py",
+    "conf/all_auth.py",
     "conf/boilerplate.py",
     "conf/db.py",
     "conf/healthchecks.py",

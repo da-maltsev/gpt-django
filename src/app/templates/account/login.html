@@ -4,20 +4,17 @@
 {% load i18n %}
 {% load account socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
-
 {% block content %}
 <div class="row justify-content-center my-4">
   <div class="col-md-7 mt-4">
     <div class="card">
-      <h1 class="card-header text-center">{% trans "Sign In" %}</h1>
+      <h1 class="card-header text-center">{% trans "Авторизоваться" %}</h1>
       <div class="card-body">
 
         {% get_providers as socialaccount_providers %}
 
         {% if socialaccount_providers %}
-        <p class="text-center">Please sign in with one
-          of your existing third party accounts.</p>
+        <p class="text-center">Пожалуйста, авторизуйтесь с помощью одного из представленных провайдеров.</p>
 
         <div class="card mb-2">
           <div class="card-body p-2">
