@@ -1,0 +1,28 @@
+{% load i18n %}
+<header class="header">
+  <div class="container-fluid px-lg-5">
+    <!-- nav -->
+    <nav class="py-4">
+      <ul class="menu mt-2">
+        <li class="active"><a href="{% url 'gpt:home' %}">Главная</a></li>
+
+        <li>
+          {% if user.is_authenticated %}
+          <span>{{ user.username }}</span>
+          <a href="{% url 'account_logout' %}"
+             style="color: black; font-weight: 700; text-transform: uppercase;">
+            Выход
+          </a>
+          {% else %}
+          <a href="{% url 'account_login' %}"
+             style="color: black; font-weight: 700; text-transform: uppercase;">
+            Авторизоваться
+          </a>
+          {% endif %}
+        </li>
+      </ul>
+    </nav>
+    <!-- //nav -->
+  </div>
+</header>
+<!-- //header -->

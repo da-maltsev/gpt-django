@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %} Login {% endblock %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center my-4">
+  <div class="col-md-7 mt-4">
+    <div class="card">
+      <h1 class="card-header text-center">{% trans "Sign In" %}</h1>
+      <div class="card-body">
+
+        {% get_providers as socialaccount_providers %}
+
+        {% if socialaccount_providers %}
+        <p class="text-center">Please sign in with one
+          of your existing third party accounts.</p>
+
+        <div class="card mb-2">
+          <div class="card-body p-2">
+            <ul class="socialaccount_providers">
+              {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      {% include "socialaccount/snippets/login_extra.html" %}
+
+      {% else %}
+      <p>{% blocktrans %}If you have not created an account yet, then please
+        <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

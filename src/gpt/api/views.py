@@ -16,7 +16,7 @@ def new_chat(request: HttpRequest) -> HttpResponse:
 
 # this is the view for handling errors
 def error_handler(request: HttpRequest) -> HttpResponse:
-    return render(request, "assistant/404.html")
+    return render(request, "404.html")
 
 
 # this is the home view for handling home page logic

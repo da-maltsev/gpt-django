@@ -15,12 +15,17 @@ THIRD_PARTY_APPS = [
     "rest_framework_jwt.blacklist",
     "django_filters",
     "axes",
+    "django.contrib.sites",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    'allauth.socialaccount.providers.vk',
 ]
 
 INSTALLED_APPS = APPS + THIRD_PARTY_APPS

@@ -13,6 +13,8 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG", cast=bool, default=False)
 CI = env("CI", cast=bool, default=False)
 
+SITE_ID = 1
+
 include(
     "conf/api.py",
     "conf/auth.py",

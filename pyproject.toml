@@ -23,6 +23,7 @@ dependencies = [
     "psycopg2-binary",
     "openai",
     "six",
+    "django-allauth",
 ]
 
 
