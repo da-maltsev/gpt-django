@@ -4,6 +4,9 @@ FROM python:3.11.3-slim-bullseye
 ENV PYTHONUNBUFFERED 1
 ENV DEBIAN_FRONTEND noninteractive
 
+ENV DATABASE_URL ${DATABASE_URL}
+ARG SECRET_KEY
+
 ENV STATIC_ROOT /static
 
 ENV _UWSGI_VERSION 2.0.21
@@ -29,11 +32,10 @@ ADD src /src
 
 RUN ./manage.py compilemessages
 RUN ./manage.py collectstatic --noinput
-RUN ./manage.py migrate
 
 ARG RELEASE=dev-untagged
 #ENV SENTRY_RELEASE ${RELEASE}
 
-USER root
+USER nobody
 
-CMD uwsgi --master --http 0.0.0.0:8000 --module app.wsgi --workers 1 --threads 1 --harakiri 25 --max-requests 500 --log-x-forwarded-for --buffer-size 32000
+CMD sh -c "./manage.py migrate && uwsgi --master --http 0.0.0.0:8000 --module app.wsgi --workers 2 --threads 2 --harakiri 25 --max-requests 500 --log-x-forwarded-for --buffer-size 32000"]
