@@ -23,6 +23,7 @@ jobs:
           script: |
             cd gpt
             git pull
+            docker compose pull
             echo "${{ secrets.ENV_FILE }}" > .env
             docker compose up -d
             docker image prune -a
