@@ -24,9 +24,15 @@ REST_FRAMEWORK = {
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.NamespaceVersioning",
     "DEFAULT_PAGINATION_CLASS": "app.api.pagination.AppPagination",
     "PAGE_SIZE": env("PAGE_SIZE", cast=int, default=20),
+    "DEFAULT_THROTTLE_CLASSES": ["rest_framework.throttling.AnonRateThrottle", "rest_framework.throttling.UserRateThrottle"],
     "DEFAULT_THROTTLE_RATES": {
-        "anon-auth": "10/min",
-        "anon": "5/min",
+        "anon-auth": "3/min",
+        "anon": "20/min",
+        "user": "60/min",
+        "anon-get-gpt": "60/min",
+        "anon-post-gpt": "2/min",
+        "user-get-gpt": "60/min",
+        "user-post-gpt": "20/min",
     },
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
