@@ -70,6 +70,7 @@ django==3.2.18
     #   django-axes
     #   django-filter
     #   django-healthchecks
+    #   django-jazzmin
     #   django-storages
     #   django-stubs
     #   django-stubs-ext
@@ -94,6 +95,8 @@ django-ipware==4.0.2
     # via
     #   django-axes
     #   gpt-django (pyproject.toml)
+django-jazzmin==2.6.0
+    # via gpt-django (pyproject.toml)
 django-split-settings==1.2.0
     # via gpt-django (pyproject.toml)
 django-storages==1.13.2
