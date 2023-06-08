@@ -1,6 +1,20 @@
+# Gpt-django
+
+It's some sort of pet-project. The main purpose is to give access to interaction with ChatGPT for my friends and relatives.
+So it's actualy simple django project with templates. 
+
+At this moment it's hosted on https://urf4cknmt.space
+
+# What's next?
+
+It would be great to keep Django just as backend using DRF and create some modern frontend with React/Vue/Svelte. 
+I'm kinda lame in frontend stuff, so I've made it with ChatGPT and I know it looks ugly 😅
+
+Feel free to make pull requests if you have any enhancement both for backend and frontend parts.
+
 # Django project
 
-This project is bootstrapped using [fandsdev/django](http://github.com/fandsdev/django) template. [Drop a line](https://github.com/fandsdev/django/issues) if you have some issues.
+This project is bootstrapped using [fandsdev/django](http://github.com/fandsdev/django) template.
 
 ## Project structure
 
@@ -13,11 +27,13 @@ Django user model is located in the separate `users` app.
 Also, feel free to add as much django apps as you want.
 
 ## Installing on a local machine
-This project requires python 3.10. Deps are managed by [pip-tools](https://github.com/jazzband/pip-tools)
+This project requires python 3.11. Deps are managed by [pip-tools](https://github.com/jazzband/pip-tools)
 
-Install requirements:
+Create venv and install requirements:
 
 ```bash
+$ python3 -m venv venv
+$ source ./venv/bin/activate
 $ pip install --upgrade pip pip-tools
 $ make
 ```
