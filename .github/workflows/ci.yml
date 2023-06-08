@@ -148,4 +148,5 @@ jobs:
             docker compose pull
             echo "${{ secrets.ENV_FILE }}" > .env
             docker compose up -d
-            docker image prune -a
+            docker container prune -f
+            docker image prune -a -f
