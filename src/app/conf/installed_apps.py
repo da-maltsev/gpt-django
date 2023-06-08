@@ -8,6 +8,7 @@ APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "jazzmin",
     "drf_spectacular",
     "drf_spectacular_sidecar",
     "rest_framework",
