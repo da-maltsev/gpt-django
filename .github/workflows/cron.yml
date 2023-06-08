@@ -2,7 +2,7 @@
 name: Regular redeploy
 on:
   schedule:
-    - cron: "*/60 * * * *"
+    - cron: "0 2 * * *"
 
 jobs:
   deploy:
@@ -26,4 +26,5 @@ jobs:
             docker compose pull
             echo "${{ secrets.ENV_FILE }}" > .env
             docker compose up -d
-            docker image prune -a
+            docker container prune -f
+            docker image prune -a -f
