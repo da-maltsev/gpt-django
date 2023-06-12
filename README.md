@@ -49,6 +49,9 @@ $ ./manage.py runserver
 
 Testing:
 ```bash
+# run formatter
+$ make fmt
+
 # run lint
 $ make lint
 
