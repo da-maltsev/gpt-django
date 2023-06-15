@@ -9,6 +9,7 @@ from django.utils.functional import cached_property
 
 from gpt.models import Reply
 from gpt.services.message_actor_base import MessageActorBase
+from users.models import User
 
 
 @dataclass
@@ -63,7 +64,7 @@ class MessageCreator(MessageActorBase):
         if len(self.session["messages"]) >= 5:
             previous_question = self.session["messages"][-4]["content"]
             previous_answer = self.session["messages"][-3]["content"]
-            previous_reply = self.user.replies.last()  # type: ignore
+            previous_reply = self.user.replies.first()  # type: ignore
             if previous_reply:
                 if previous_reply.answer != previous_answer or previous_reply.question != previous_question or previous_reply.status != Reply.Status.ACTIVE:
                     previous_reply = None
@@ -82,6 +83,10 @@ class MessageCreator(MessageActorBase):
             "prompt": "",
             "temperature": self.temperature,
         }
+
+    @cached_property
+    def is_authorized(self) -> bool:
+        return isinstance(self.user, User)
 
     @cached_property
     def open_ai_client_completion(self) -> Type[openai.ChatCompletion]:
