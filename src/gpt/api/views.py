@@ -52,7 +52,7 @@ def new_chat(request: HttpRequest) -> HttpResponse:
     # clear the messages list
     user = request.user
     if isinstance(user, User):
-        active_replies = user.replies.filter(status=Reply.Status.ACTIVE)  # type: ignore
+        active_replies = user.replies.filter(status=Reply.Status.ACTIVE)
         for reply in active_replies:
             reply.status = Reply.Status.ARCHIVED
         Reply.objects.bulk_update(active_replies, ["status"])
