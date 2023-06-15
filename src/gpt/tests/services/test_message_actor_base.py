@@ -7,8 +7,8 @@ pytestmark = [
 ]
 
 
-def test_post_init(session):
-    MessageActorBase(session)
+def test_post_init(session, anon_user):
+    MessageActorBase(session, anon_user)
 
     assert "messages" in session
     assert session["messages"] == [

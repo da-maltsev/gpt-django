@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} Q&A {% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <h3>{{ reply.question }}</h3>
+        </div>
+        <div class="card-body">
+          <p>{{ reply.answer }}</p>
+          {% if reply.previous_reply %}
+          <a href="{% url 'gpt:reply_detail' pk=reply.previous_reply.pk %}">Связанный вопрос</a>
+          {% endif %}
+
+          <p>Создан: {{ reply.created }}</p>
+        </div>
+        <div class="card-footer">
+          <a href="{{ previous_page }}" class="btn btn-secondary">Назад</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} Q&A {% endblock %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="row">
+    <div class="col-md-12"><h1 class="my-4 text-center">Вопросы и ответы</h1>
+      <ul class="list-group"> {% for reply in replies %}
+        <li class="list-group-item"><h5><a href="{% url 'gpt:reply_detail' pk=reply.pk %}">{{ reply.question|slice:25 }}</a></h5>
+          <p>{{ reply.answer|slice:55 }}</p>
+          <p>Дата создания: {{ reply.created }}</p></li>
+        {% empty %}
+        <li class="list-group-item">Пока список пуст.</li>
+        {% endfor %}
+      </ul>
+      <nav aria-labelledby="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a></li>
+          {% endif %}
+          {% for i in page_obj.paginator.page_range %}
+          {% if page_obj.number == i %}
+          <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+          {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock %}
