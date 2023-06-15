@@ -7,8 +7,8 @@ pytestmark = [
 ]
 
 
-def test_act(session):
-    result = MessageDisplayer(session)()
+def test_act_anon(session, anon_user):
+    result = MessageDisplayer(session, anon_user)()
 
     assert isinstance(result, dict)
     assert "messages" in result
@@ -16,8 +16,17 @@ def test_act(session):
     assert "temperature" in result
 
 
-def test_context_to_return(session):
-    result = MessageDisplayer(session).context_to_return
+def test_act_auth(session, user):
+    result = MessageDisplayer(session, user)()
+
+    assert isinstance(result, dict)
+    assert "messages" in result
+    assert "prompt" in result
+    assert "temperature" in result
+
+
+def test_context_to_return(session, anon_user):
+    result = MessageDisplayer(session, anon_user).context_to_return
 
     assert isinstance(result, dict)
     assert "messages" in result
