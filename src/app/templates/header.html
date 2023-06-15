@@ -24,6 +24,7 @@
           </li>
             {% if user.is_authenticated %}
             <span class="nav-link">Авторизован как {{user.username}}</span>
+            <a class="nav-link" href="#">Мои вопросы и ответы</a>
             {% endif %}
           <li class="nav-item">
             {% if user.is_authenticated %}
