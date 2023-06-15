@@ -64,8 +64,9 @@ class MessageCreator(MessageActorBase):
             previous_question = self.session["messages"][-4]["content"]
             previous_answer = self.session["messages"][-3]["content"]
             previous_reply = self.user.replies.last()  # type: ignore
-            if previous_reply.answer != previous_answer or previous_reply.question != previous_question or previous_reply.status != Reply.Status.ACTIVE:
-                previous_reply = None
+            if previous_reply:
+                if previous_reply.answer != previous_answer or previous_reply.question != previous_question or previous_reply.status != Reply.Status.ACTIVE:
+                    previous_reply = None
 
         return Reply.objects.create(
             author=self.user,  # type: ignore
