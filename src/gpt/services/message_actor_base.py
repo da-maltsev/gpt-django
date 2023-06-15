@@ -23,7 +23,6 @@ class MessageActorBase(BaseService):
                     "content": "На осмысленные вопросы будет дан осмысленный ответ. На глупые вопросы будет дан анекдот про армян и нарды.",
                 },
             ]
-            self.is_authorized = isinstance(self.user, User)
 
     def act(self) -> Any:
         ...
