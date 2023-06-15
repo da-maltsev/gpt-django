@@ -10,10 +10,14 @@
         </div>
         <div class="card-body">
           <p>{{ reply.answer }}</p>
-          {% if reply.previous_reply %}
-          <a href="{% url 'gpt:reply_detail' pk=reply.previous_reply.pk %}">Связанный вопрос</a>
-          {% endif %}
-
+          <ul>
+            {% if reply.previous_reply %}
+            <li><a href="{% url 'gpt:reply_detail' pk=reply.previous_reply.pk %}">Предыдущий связанный вопрос</a></li>
+            {% endif %}
+            {% if reply.next_reply %}
+            <li><a href="{% url 'gpt:reply_detail' pk=reply.next_reply.pk %}">Следующий связанный вопрос</a></li>
+            {% endif %}
+          </ul>
           <p>Создан: {{ reply.created }}</p>
         </div>
         <div class="card-footer">

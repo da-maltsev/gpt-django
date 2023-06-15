@@ -9,6 +9,7 @@ from rest_framework.decorators import throttle_classes
 from rest_framework.permissions import AllowAny
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import AnonymousUser
 from django.db import models
 from django.http import HttpRequest
 from django.http import HttpResponse
@@ -50,7 +51,7 @@ class ReplyDetailView(DetailView):
 
 def new_chat(request: HttpRequest) -> HttpResponse:
     # clear the messages list
-    user = request.user
+    user: User | AnonymousUser = request.user
     if isinstance(user, User):
         active_replies = user.replies.filter(status=Reply.Status.ACTIVE)
         for reply in active_replies:
