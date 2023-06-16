@@ -14,7 +14,7 @@ def test_act_anon(session, anon_user):
     assert len(session["messages"]) == 3
 
 
-def test_act_auth(session, user):
+def test_act_auth_creates_reply(session, user):
     MessageCreator(session, user, "test prompt", 0.1)()
 
     saved_reply = Reply.objects.get()
@@ -23,6 +23,19 @@ def test_act_auth(session, user):
     assert saved_reply.author == user
     assert saved_reply.status == Reply.Status.ACTIVE
     assert len(session["messages"]) == 3
+
+
+def test_act_auth_creates_reply_with_links(session, user, reply):
+    session["messages"] = [{"role": "system", "content": "sysysysy"}]
+    session["messages"].append({"role": "user", "content": reply.question})
+    session["messages"].append({"role": "assistant", "content": reply.answer})
+    reply.setattr_and_save("status", Reply.Status.ACTIVE)
+
+    MessageCreator(session, user, "test prompt", 0.1)()
+
+    saved_reply = Reply.objects.first()
+    assert saved_reply.previous_reply == reply
+    assert reply.next_reply == saved_reply
 
 
 def test_append_prompt_to_messages(session, anon_user):
