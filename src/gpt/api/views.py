@@ -24,6 +24,7 @@ from gpt.api.throttle import UserGETGptRateThrottle
 from gpt.api.throttle import UserPOSTGptRateThrottle
 from gpt.models import Reply
 from gpt.services import MessageCreator
+from gpt.services import MessageCreatorException
 from gpt.services import MessageDisplayer
 from users.models import User
 
@@ -86,10 +87,13 @@ def home(request: HttpRequest) -> HttpResponse:
 @throttle_classes([AnonPOSTGptRateThrottle, UserPOSTGptRateThrottle])
 @permission_classes([AllowAny])
 def ask_gpt(request: HttpRequest) -> HttpResponse:
-    context = MessageCreator(
-        session=request.session,
-        user=request.user,
-        prompt=request.POST.get("prompt", ""),
-        temperature=float(request.POST.get("temperature", 0.1)),
-    )()
-    return render(request, "assistant/home.html", context)
+    try:
+        context = MessageCreator(
+            session=request.session,
+            user=request.user,
+            prompt=request.POST.get("prompt", ""),
+            temperature=float(request.POST.get("temperature", 0.1)),
+        )()
+        return render(request, "assistant/home.html", context)
+    except MessageCreatorException:
+        return redirect("gpt:error_handler")

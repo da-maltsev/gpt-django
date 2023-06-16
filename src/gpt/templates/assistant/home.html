@@ -9,8 +9,15 @@
         <div class="chat-history mb-3">
           {% for message in messages %}
           <div class="card mb-2 {% if message.role == 'assistant' %} bg-secondary text-white{% endif %}">
-            <div class="card-body p-2">
-              <strong>{{ message.role|title }}:</strong> {{ message.content|linebreaksbr }}
+
+        <div class="card-header">
+          <strong>{{ message.role|title }}:</strong>
+        </div>
+            <div class="card-body p-2 text-break">
+
+              <div style="white-space: pre-wrap;">
+                {{ message.content|escape }}
+              </div>
             </div>
           </div>
           {% endfor %}
@@ -18,8 +25,8 @@
         <form class="row g-3" action="{% url 'gpt:ask_gpt' %}" method="POST" onsubmit="return submitForm(event)">
           {% csrf_token %}
           <div class="col-12">
-            <input class="form-control mb-2" required type="text" autofocus="autofocus" name="prompt"
-                   value="{{ prompt }}" id="">
+            <textarea class="form-control mb-2" required autofocus="autofocus" name="prompt" id=""
+                      rows="1">{{ prompt }}</textarea>
           </div>
           <div class="col-md-6">
             <button class="btn btn-success fw-bold w-100" type="submit" id="gpt-ask">
@@ -39,6 +46,11 @@
   </div>
 </div>
 <script>
+  const textarea = document.querySelector('textarea[name="prompt"]');
+  textarea.addEventListener('input', function () {
+    this.setAttribute('rows', Math.ceil(this.value.length / 50));
+  });
+
   function submitForm(event) {
     event.preventDefault();
     const button = document.getElementById("gpt-ask");
