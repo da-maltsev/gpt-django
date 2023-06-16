@@ -28,7 +28,7 @@ class OpenAiProfile(TimestampedModel):
         ARCHIVED = "archived", "Archived"
 
     uuid = models.UUIDField(default=uuid.uuid4, primary_key=True)
-    token = models.CharField(max_length=100)
+    token = models.CharField(max_length=100, unique=True)
     usage_count = models.PositiveIntegerField(default=0)
     comment = models.TextField(default="")
 

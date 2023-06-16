@@ -63,8 +63,13 @@ def new_chat(request: HttpRequest) -> HttpResponse:
 
 
 def error_handler(request: HttpRequest) -> HttpResponse:
-    # this is the view for handling errors
+    """this is the view for handling errors"""
     return render(request, "404.html")
+
+
+def about_handler(request: HttpRequest) -> HttpResponse:
+    """this is the view for about page"""
+    return render(request, "about.html")
 
 
 @api_view(["GET"])
