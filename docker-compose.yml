@@ -23,7 +23,7 @@ services:
       - OPENAI_TOKEN=${OPENAI_TOKEN}
     command: >
       sh -c "./manage.py migrate &&
-             uwsgi --master --http 0.0.0.0:8000 --module app.wsgi --workers 1 --threads 1 --harakiri 25 --max-requests 500 --log-x-forwarded-for --buffer-size 32000"
+             uwsgi --master --http 0.0.0.0:8000 --module app.wsgi --workers 1 --threads 1 --harakiri 30 --max-requests 500 --log-x-forwarded-for --buffer-size 32000"
     ports:
       - 8000:8000
     depends_on:

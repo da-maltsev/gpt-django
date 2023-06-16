@@ -5,8 +5,8 @@
   <div class="row">
     <div class="col-md-12"><h1 class="my-4 text-center">Вопросы и ответы</h1>
       <ul class="list-group"> {% for reply in replies %}
-        <li class="list-group-item"><h5><a href="{% url 'gpt:reply_detail' pk=reply.pk %}">{{ reply.question|slice:25 }}</a></h5>
-          <p>{{ reply.answer|slice:55 }}</p>
+        <li class="list-group-item"><h5><a href="{% url 'gpt:reply_detail' pk=reply.pk %}">{{ reply.question|truncatechars_html:25 }}</a></h5>
+          <p>{{ reply.answer|truncatechars_html:55 }}</p>
           <p>Дата создания: {{ reply.created }}</p></li>
         {% empty %}
         <li class="list-group-item">Пока список пуст.</li>
