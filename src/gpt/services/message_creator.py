@@ -12,6 +12,10 @@ from gpt.services.openai_token_getter import OpenAiTokenGetter
 from users.models import User
 
 
+class MessageCreatorException(Exception):
+    """raises when it's impossible to create message"""
+
+
 @dataclass
 class MessageCreator(MessageActorBase):
     """
@@ -45,10 +49,12 @@ class MessageCreator(MessageActorBase):
                 messages=self.session["messages"],
                 temperature=self.temperature,
                 max_tokens=1000,
+                request_timeout=25,
             )
             return response["choices"][0]["message"]["content"]
         except OpenAIError as e:
-            return f"Error while handling request to OpenAI:\n{e}"
+            self.session["messages"].pop()
+            raise MessageCreatorException(e)
 
     def add_response_to_message_list(self) -> None:
         """append the response to the messages list"""

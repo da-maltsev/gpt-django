@@ -15,6 +15,12 @@ CI = env("CI", cast=bool, default=False)
 
 SITE_ID = 1
 
+PYGMENTS_FORMATTERS = {
+    "html": "pygments.formatters.HtmlFormatter",
+}
+
+PYGMENTS_STYLE = "default"
+
 include(
     "conf/api.py",
     "conf/auth.py",
