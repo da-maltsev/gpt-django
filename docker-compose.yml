@@ -23,7 +23,7 @@ services:
       - OPENAI_TOKEN=${OPENAI_TOKEN}
     command: >
       sh -c "./manage.py migrate &&
-             ./manage.py runserver"
+             ./manage.py runserver 0.0.0.0:8000"
     ports:
       - 8000:8000
     depends_on:
