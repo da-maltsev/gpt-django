@@ -29,6 +29,8 @@ Also, feel free to add as much django apps as you want.
 ## Installing on a local machine
 This project requires python 3.11. Deps are managed by [pip-tools](https://github.com/jazzband/pip-tools)
 
+### If you prefer develop from venv
+
 Create venv and install requirements:
 
 ```bash
@@ -41,13 +43,30 @@ $ make
 Run the server:
 
 ```bash
+$ cp .env.example .env  # default environment variables
 $ cd src && cp app/.env.ci app/.env  # default environment variables
 $ ./manage.py migrate
 $ ./manage.py createsuperuser
 $ ./manage.py runserver
 ```
 
-Testing:
+### If you prefer develop from container
+
+Run the docker-compose:
+
+```bash
+$ cp .env.example .env  # default environment variables
+$ cd src && cp app/.env.ci app/.env  # default environment variables
+$ docker-compose up -d
+$ docker-compose exec app bash
+$ ./manage.py createsuperuser
+```
+There is volume between your and container src directories, so just do what you want.
+
+Don't forget to run tests inside app container in such case.
+
+
+### Testing:
 ```bash
 # run formatter
 $ make fmt
@@ -62,7 +81,6 @@ $ make test
 Development servers:
 
 ```bash
-# run django dev server
 $ ./manage.py runserver
 
 ```
