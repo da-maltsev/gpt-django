@@ -14,5 +14,5 @@ def reply(self: "FactoryProtocol", **kwargs: dict) -> "Reply":
 
 
 @register
-def open_ai_profile(self: "FactoryProtocol", **kwargs: dict) -> "OpenAiProfile":
+def openai_profile(self: "FactoryProtocol", **kwargs: dict) -> "OpenAiProfile":
     return self.mixer.blend("gpt.OpenAiProfile", **kwargs)

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Home {% endblock %}
 {% block content %}
-<div class="row justify-content-center overflow-auto">
+<div class="row justify-content-center overflow-auto pb-4">
   <div class="col-md-8 mt-4">
     <div class="card">
       <h1 class="card-header text-center">Веб Ассистент</h1>
@@ -28,13 +28,19 @@
             <textarea class="form-control mb-2" required autofocus="autofocus" name="prompt" id=""
                       rows="1">{{ prompt }}</textarea>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <button class="btn btn-success fw-bold w-100" type="submit" id="gpt-ask">
               <span id="spinner" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
               Спросить у ИИ
             </button>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
+            <button type="button" class="btn btn-secondary fw-bold w-100"
+                    disabled="true">
+              Вопросов за всё время: {{ usage_count }}
+            </button>
+          </div>
+          <div class="col-md-4">
             <button type="button" class="btn btn-primary fw-bold w-100"
                     onclick="location.href='{% url 'gpt:new_chat' %}'">
               Начать по новой
