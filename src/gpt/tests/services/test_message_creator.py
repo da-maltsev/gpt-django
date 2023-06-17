@@ -12,6 +12,7 @@ def test_act_anon(session, anon_user):
     MessageCreator(session, anon_user, "test prompt", 0.1)()
 
     assert len(session["messages"]) == 3
+    assert Reply.objects.count() == 0
 
 
 def test_act_auth_creates_reply(session, user):

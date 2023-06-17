@@ -31,8 +31,9 @@ class MessageCreator(MessageActorBase):
         self.append_prompt_to_messages()
         self.add_response_to_message_list()
 
-        if self.is_authorized:
-            self.save_reply()
+        match self.user:
+            case User():
+                self.save_reply()
 
         return self.context_to_return
 
@@ -82,18 +83,6 @@ class MessageCreator(MessageActorBase):
             answer=answer,
             previous_reply=previous_reply,
         )
-
-    @cached_property
-    def context_to_return(self) -> dict:
-        return {
-            "messages": self.session["messages"],
-            "prompt": "",
-            "temperature": self.temperature,
-        }
-
-    @cached_property
-    def is_authorized(self) -> bool:
-        return isinstance(self.user, User)
 
     @cached_property
     def open_ai_client_completion(self) -> Type[openai.ChatCompletion]:

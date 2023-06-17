@@ -14,5 +14,5 @@ def reply(factory: "FixtureFactory", user: "User") -> "Reply":
 
 
 @pytest.fixture
-def open_ai_profile(factory: "FixtureFactory") -> "OpenAiProfile":
-    return factory.open_ai_profile(usage_count=0)
+def openai_profile(factory: "FixtureFactory") -> "OpenAiProfile":
+    return factory.openai_profile(usage_count=0)

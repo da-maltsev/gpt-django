@@ -14,6 +14,7 @@ def test_act_anon(session, anon_user):
     assert "messages" in result
     assert "prompt" in result
     assert "temperature" in result
+    assert "usage_count" in result
 
 
 def test_act_auth(session, user):
@@ -23,12 +24,14 @@ def test_act_auth(session, user):
     assert "messages" in result
     assert "prompt" in result
     assert "temperature" in result
+    assert "usage_count" in result
 
 
-def test_context_to_return(session, anon_user):
+def test_context_to_return_no_messages(session, anon_user):
     result = MessageDisplayer(session, anon_user).context_to_return
 
     assert isinstance(result, dict)
     assert "messages" in result
     assert "prompt" in result
     assert "temperature" in result
+    assert "usage_count" in result
