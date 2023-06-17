@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
 
   app:
-    build: .
+    image: ghcr.io/da-maltsev/gpt-django:latest
     container_name: backend
     environment:
       - DATABASE_URL=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db/${POSTGRES_DB:-postgres}
@@ -28,9 +28,8 @@ services:
       - 8000:8000
     depends_on:
       - db
-    volumes:
-      - ./src:/src
     restart: unless-stopped
+
 
 volumes:
   postgres_data:

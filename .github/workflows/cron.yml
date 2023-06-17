@@ -23,8 +23,8 @@ jobs:
           script: |
             cd gpt
             git pull
-            docker-compose pull
+            docker-compose -f docker-compose.prod.yml pull
             echo "${{ secrets.ENV_FILE }}" > .env
-            docker-compose up -d
+            docker-compose -f docker-compose.prod.yml up -d
             docker container prune -f
             docker image prune -a -f
