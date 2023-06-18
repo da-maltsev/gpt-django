@@ -15,7 +15,7 @@ from users.models import User
 
 
 @extend_schema_view(
-    post=extend_schema(responses={201: ChatSerializer}, request=ChatSerializer),
+    post=extend_schema(responses={201: ChatSerializer}, request=ChatSerializer, tags=["chat"]),
 )
 class OpenAiChatApiView(APIView):
     throttle_classes = [AnonPOSTGptRateThrottle, UserPOSTGptRateThrottle]
