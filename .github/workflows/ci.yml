@@ -146,7 +146,9 @@ jobs:
             cd gpt
             git pull
             echo "${{ secrets.ENV_FILE }}" > .env
-            docker-compose -f docker-compose.prod.yml pull --always-retry --retry-amount=5
+            docker-compose -f docker-compose.prod.yml pull
+            docker-compose -f docker-compose.prod.yml pull
+            docker-compose -f docker-compose.prod.yml pull
             docker-compose -f docker-compose.prod.yml up -d
             docker container prune -f
             docker image prune -a -f
