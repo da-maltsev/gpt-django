@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 @pytest.fixture
 def reply(factory: "FixtureFactory", user: "User") -> "Reply":
-    return factory.reply(author=user)
+    return factory.reply(author=user, previous_reply=None)
 
 
 @pytest.fixture

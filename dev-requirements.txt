@@ -64,7 +64,7 @@ decorator==5.1.1
     # via ipython
 defusedxml==0.7.1
     # via python3-openid
-django==3.2.18
+django==4.1.9
     # via
     #   django-allauth
     #   django-axes
@@ -311,9 +311,7 @@ python-dateutil==2.8.2
 python3-openid==3.2.0
     # via django-allauth
 pytz==2022.7.1
-    # via
-    #   django
-    #   djangorestframework
+    # via djangorestframework
 pyyaml==6.0
     # via drf-spectacular
 redis==4.4.2

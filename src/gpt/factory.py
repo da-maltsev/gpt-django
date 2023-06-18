@@ -10,7 +10,8 @@ if TYPE_CHECKING:
 
 @register
 def reply(self: "FactoryProtocol", **kwargs: dict) -> "Reply":
-    return self.mixer.blend("gpt.Reply", **kwargs)
+    previous_reply = kwargs.pop("previous_reply", None)
+    return self.mixer.blend("gpt.Reply", previous_reply=previous_reply, **kwargs)
 
 
 @register

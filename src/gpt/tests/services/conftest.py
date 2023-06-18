@@ -14,8 +14,8 @@ def session() -> SessionBase:
 
 
 @pytest.fixture(autouse=True)
-def _open_ai(mocker):
-    mocker.patch(
+def open_ai_mock(mocker):
+    return mocker.patch(
         "gpt.services.MessageCreator.ask_open_ai",
         return_value="test response",
     )
