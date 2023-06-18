@@ -15,7 +15,14 @@ from users.models import User
 
 
 @extend_schema_view(
-    post=extend_schema(responses={201: ChatSerializer}, request=ChatSerializer, tags=["chat"]),
+    post=extend_schema(
+        responses={201: ChatSerializer},
+        request=ChatSerializer,
+        tags=["chat"],
+        description='Method gets full current active chat condition with all questions and answers.\
+        It returns same chat condition + answer as\
+         {"messages": [...old_messages, {"role": "assistant", "content": "some answer"}]}',
+    ),
 )
 class OpenAiChatApiView(APIView):
     throttle_classes = [AnonPOSTGptRateThrottle, UserPOSTGptRateThrottle]
