@@ -6,6 +6,7 @@ from django.urls import path
 
 app_name = "api_v1"
 urlpatterns = [
+    path("", include("gpt.api.v1.urls")),
     path("auth/", include("a12n.urls")),
     path("users/", include("users.urls")),
     path("healthchecks/", include("django_healthchecks.urls")),

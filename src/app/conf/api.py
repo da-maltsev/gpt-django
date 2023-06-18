@@ -35,6 +35,7 @@ REST_FRAMEWORK = {
         "user-post-gpt": "20/min",
     },
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "EXCEPTION_HANDLER": "app.exceptions.app_service_exception_handler",
 }
 
 # Adding session auth and browsable API at the developer machine
