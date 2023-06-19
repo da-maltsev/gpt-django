@@ -1,6 +1,6 @@
 import pytest
 
-from gpt.services.openai_usages_counter import OpenAiUsagesCounter
+from gpt.services.openai.openai_usages_counter import OpenAiUsagesCounter
 
 pytestmark = [
     pytest.mark.django_db,

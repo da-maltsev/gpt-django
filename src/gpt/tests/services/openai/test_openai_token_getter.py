@@ -2,7 +2,7 @@ import pytest
 
 from django.conf import settings
 
-from gpt.services.openai_token_getter import OpenAiTokenGetter
+from gpt.services.openai.openai_token_getter import OpenAiTokenGetter
 
 pytestmark = [
     pytest.mark.django_db,

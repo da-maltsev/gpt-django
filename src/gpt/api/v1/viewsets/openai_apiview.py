@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from gpt.api.throttle import AnonPOSTGptRateThrottle
 from gpt.api.throttle import UserPOSTGptRateThrottle
 from gpt.api.v1.serializers import ChatSerializer
-from gpt.services.v1 import OpenAiChatCompleter
+from gpt.services.v1 import ChatCompleter
 from users.models import User
 
 
@@ -34,7 +34,7 @@ class OpenAiChatApiView(APIView):
         current_messages = serializer.validated_data.copy()
         user_or_none = self.get_user_or_none(request)
 
-        messages_with_answer = OpenAiChatCompleter(current_messages.get("messages"), user_or_none)()
+        messages_with_answer = ChatCompleter(current_messages.get("messages"), user_or_none)()
 
         response_data = {
             "messages": messages_with_answer,

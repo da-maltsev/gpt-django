@@ -1,14 +1,9 @@
 from dataclasses import dataclass
-from typing import Type
-
-import openai
-from openai import OpenAIError
-
-from django.utils.functional import cached_property
+from typing import final
 
 from gpt.models import Reply
 from gpt.services.message_actor_base import MessageActorBase
-from gpt.services.openai_token_getter import OpenAiTokenGetter
+from gpt.services.openai import OpenAiChatter
 from users.models import User
 
 
@@ -16,6 +11,7 @@ class MessageCreatorException(Exception):
     """raises when it's impossible to create message"""
 
 
+@final
 @dataclass
 class MessageCreator(MessageActorBase):
     """
@@ -44,18 +40,7 @@ class MessageCreator(MessageActorBase):
 
     def ask_open_ai(self) -> str:
         """call the openai API and get formatted response"""
-        try:
-            response = self.open_ai_client_completion.create(
-                model="gpt-3.5-turbo",
-                messages=self.session["messages"],
-                temperature=self.temperature,
-                max_tokens=1000,
-                request_timeout=25,
-            )
-            return response["choices"][0]["message"]["content"]
-        except OpenAIError as e:
-            self.session["messages"].pop()
-            raise MessageCreatorException(e)
+        return OpenAiChatter(messages=self.session["messages"])()
 
     def add_response_to_message_list(self) -> None:
         """append the response to the messages list"""
@@ -83,9 +68,3 @@ class MessageCreator(MessageActorBase):
             answer=answer,
             previous_reply=previous_reply,
         )
-
-    @cached_property
-    def open_ai_client_completion(self) -> Type[openai.ChatCompletion]:
-        openai.api_key = OpenAiTokenGetter()()
-
-        return openai.ChatCompletion

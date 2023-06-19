@@ -1,5 +1,5 @@
 __all__ = [
-    "OpenAiChatCompleter",
+    "ChatCompleter",
 ]
 
-from gpt.services.v1.openai_chat_completer import OpenAiChatCompleter
+from gpt.services.v1.chat_completer import ChatCompleter

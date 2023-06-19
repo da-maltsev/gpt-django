@@ -5,6 +5,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://your.app.origin",
     "http://*.127.0.0.1:8000",
     "https://urf4cknmt.space",
+    "https://*.urf4cknmt.space",
 ]
 
 if env("DEBUG"):
