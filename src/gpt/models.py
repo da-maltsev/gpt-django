@@ -5,10 +5,20 @@ from django.db import models
 from app.models import TimestampedModel
 
 
+class ReplyQuerySet(models.QuerySet):
+    def for_viewset(self) -> "ReplyQuerySet":
+        return self.select_related(
+            "previous_reply",
+            "next_reply",
+        )
+
+
 class Reply(TimestampedModel):
     class Status(models.TextChoices):
         ACTIVE = "active", "Active"
         ARCHIVED = "archived", "Archived"
+
+    objects = ReplyQuerySet.as_manager()
 
     uuid = models.UUIDField(default=uuid.uuid4, primary_key=True)
     question = models.TextField()
@@ -19,6 +29,7 @@ class Reply(TimestampedModel):
     status = models.CharField(choices=Status.choices, default=Status.ACTIVE, max_length=10)
 
     class Meta:
+        verbose_name_plural = "replies"
         ordering = ["-created"]
 
 
