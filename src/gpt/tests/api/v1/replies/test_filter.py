@@ -8,13 +8,6 @@ pytestmark = [
     pytest.mark.django_db,
 ]
 
-BASE_URL: str = "/api/v1/replies/"
-
-
-@pytest.fixture
-def url() -> str:
-    return BASE_URL
-
 
 @pytest.mark.parametrize(
     ("created_after", "expected"),
@@ -24,11 +17,11 @@ def url() -> str:
         ("2020-01-01", 1),
     ],
 )
-def test_created_after(as_user, user, factory, url, created_after, expected):
+def test_created_after(as_user, user, factory, url_list, created_after, expected):
     with freeze_time("2020-01-01"):
         factory.reply(author=user)
 
-    got = as_user.get(f"{url}?created_after={created_after}")["results"]
+    got = as_user.get(f"{url_list}?created_after={created_after}")["results"]
 
     assert len(got) == expected
 
@@ -41,11 +34,11 @@ def test_created_after(as_user, user, factory, url, created_after, expected):
         ("2020-01-01", 1),
     ],
 )
-def test_created_before(as_user, user, factory, url, created_before, expected):
+def test_created_before(as_user, user, factory, url_list, created_before, expected):
     with freeze_time("2020-01-01"):
         factory.reply(author=user)
 
-    got = as_user.get(f"{url}?created_before={created_before}")["results"]
+    got = as_user.get(f"{url_list}?created_before={created_before}")["results"]
 
     assert len(got) == expected
 
@@ -59,11 +52,11 @@ def test_created_before(as_user, user, factory, url, created_before, expected):
         ("2015-01-01", "2012-01-01", 0),
     ],
 )
-def test_created_before_and_after(as_user, user, factory, url, created_before, created_after, expected):
+def test_created_before_and_after(as_user, user, factory, url_list, created_before, created_after, expected):
     with freeze_time("2020-01-01"):
         factory.reply(author=user)
 
-    got = as_user.get(f"{url}?created_before={created_before}&created_after={created_after}")["results"]
+    got = as_user.get(f"{url_list}?created_before={created_before}&created_after={created_after}")["results"]
 
     assert len(got) == expected
 
@@ -75,12 +68,12 @@ def test_created_before_and_after(as_user, user, factory, url, created_before, c
         (Reply.Status.ACTIVE, 1),
     ],
 )
-def test_status(as_user, status, user, factory, url, expected):
+def test_status(as_user, status, user, factory, url_list, expected):
     with freeze_time("2020-01-01"):
         factory.reply(author=user, status=Reply.Status.ACTIVE)
         factory.cycle(2).reply(author=user, status=Reply.Status.ARCHIVED)
 
-    got = as_user.get(f"{url}?status={status}")["results"]
+    got = as_user.get(f"{url_list}?status={status}")["results"]
 
     assert len(got) == expected
 
@@ -98,11 +91,11 @@ def test_status(as_user, status, user, factory, url, expected):
         ("2015-01-01", "2012-01-01", Reply.Status.ACTIVE, 0),
     ],
 )
-def test_created_before_and_after_and_status(as_user, status, user, factory, url, created_before, created_after, expected):
+def test_created_before_and_after_and_status(as_user, status, user, factory, url_list, created_before, created_after, expected):
     with freeze_time("2020-01-01"):
         factory.reply(author=user, status=Reply.Status.ACTIVE)
         factory.cycle(2).reply(author=user, status=Reply.Status.ARCHIVED)
 
-    got = as_user.get(f"{url}?created_before={created_before}&created_after={created_after}&status={status}")["results"]
+    got = as_user.get(f"{url_list}?created_before={created_before}&created_after={created_after}&status={status}")["results"]
 
     assert len(got) == expected

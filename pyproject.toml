@@ -38,6 +38,7 @@ dev = [
     "pytest-freezegun",
     "pytest-mock",
     "pytest-randomly",
+    "pytest-lazy-fixture",
 
     "black",
 
@@ -75,6 +76,7 @@ dev = [
     "djangorestframework-stubs",
     "types-freezegun",
     "types-Pillow",
+    "types-pytest-lazy-fixture",
 ]
 
 
@@ -130,6 +132,11 @@ line_length = 160
  filterwarnings = [  # Pattern: `action:message:category:module:line` (https://docs.python.org/3/library/warnings.html#describing-warning-filters)
    "ignore:.*'rest_framework_jwt.blacklist' defines default_app_config.*You can remove default_app_config.::django",
    "ignore:distutils Version classes are deprecated. Use packaging.version instead.:DeprecationWarning:pytest_freezegun:17",
+
+
+    # Warning: django.utils.deprecation.RemovedInDjango50Warning: The is_dst argument to make_aware(), used by the Trunc() database functions and QuerySet.datetimes(), is deprecated as it has no effect with zoneinfo time zones.
+    # Don't specify the exact warning (django.utils.deprecation.RemovedInDjango50Warning) as not all version of Django know it and pytest will fail
+    "ignore:The is_dst argument to make_aware():",
  ]
  env = [
    "CI=1",

@@ -12,6 +12,7 @@ router.register("replies", viewsets.ReplyViewSet)
 
 
 urlpatterns = [
+    path("replies/count/", viewsets.RepliesCounterApiView.as_view()),
     path("", include(router.urls)),
     path("chat/", viewsets.OpenAiChatApiView.as_view()),
 ]
