@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import final
 
 from django.conf import settings
 from django.db.models import F
@@ -7,6 +8,7 @@ from app.services import BaseService
 from gpt.models import OpenAiProfile
 
 
+@final
 @dataclass
 class OpenAiTokenGetter(BaseService):
     """

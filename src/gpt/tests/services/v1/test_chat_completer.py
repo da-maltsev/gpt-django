@@ -2,7 +2,7 @@ import pytest
 
 from app.exceptions import AppServiceException
 from gpt.models import Reply
-from gpt.services.v1.openai_chat_completer import OpenAiChatCompleter
+from gpt.services.v1 import ChatCompleter
 
 pytestmark = [
     pytest.mark.django_db,
@@ -19,7 +19,7 @@ def openai_chat_completer():
         {"role": "assistant", "content": previous_answer},
         {"role": "user", "content": "Why are you so serious?"},
     ]
-    return OpenAiChatCompleter(current_messages=current_messages)
+    return ChatCompleter(current_messages=current_messages)
 
 
 @pytest.fixture
@@ -74,12 +74,4 @@ def test_act_with_error(openai_chat_completer, open_ai_mock):
     open_ai_mock.side_effect = AppServiceException("OpenAI error")
 
     with pytest.raises(AppServiceException, match="OpenAI error"):
-        openai_chat_completer()
-
-
-@pytest.mark.parametrize("role", ["assistant", "system"])
-def test_fail_if_last_message_not_from_user(openai_chat_completer, role):
-    openai_chat_completer.current_messages.append(dict(role=role, content="nothing"))
-
-    with pytest.raises(AppServiceException, match="Last message must be question from user"):
         openai_chat_completer()

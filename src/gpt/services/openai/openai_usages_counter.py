@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import final
 
 from django.db.models.aggregates import Sum
 
@@ -6,6 +7,7 @@ from app.services import BaseService
 from gpt.models import OpenAiProfile
 
 
+@final
 @dataclass
 class OpenAiUsagesCounter(BaseService):
     """Returns number of all openai usages count"""

@@ -1,26 +1,17 @@
 from dataclasses import dataclass
-from typing import Callable, Type
-
-import openai
-from openai import OpenAIError
+from typing import final
 
 from django.utils.functional import cached_property
 
-from app.exceptions import AppServiceException
 from app.services import BaseService
 from gpt.models import Reply
-from gpt.services.openai_token_getter import OpenAiTokenGetter
+from gpt.services.openai import OpenAiChatter
 from users.models import User
 
-TEMPERATURE = 0.1  # at this moment it's fine to always use default temperature
 
-
-class OpenAiChatCompleterException(AppServiceException):
-    """raises when it's impossible to complete chat"""
-
-
+@final
 @dataclass
-class OpenAiChatCompleter(BaseService):
+class ChatCompleter(BaseService):
     """
     Gets current messages, and answers to last question
     Sends question to OpenAI with context from previous messages
@@ -44,18 +35,7 @@ class OpenAiChatCompleter(BaseService):
 
     def ask_open_ai(self) -> str:
         """call the openai API and get formatted response"""
-        try:
-            response = self.open_ai_client_completion.create(
-                model="gpt-3.5-turbo",
-                messages=self.current_messages,
-                temperature=TEMPERATURE,
-                max_tokens=1000,
-                request_timeout=25,
-            )
-            return response["choices"][0]["message"]["content"]
-        except OpenAIError as e:
-            self.current_messages.pop()
-            raise OpenAiChatCompleterException(e)
+        return OpenAiChatter(self.current_messages)()
 
     def save_reply(self, user: User, question: str, answer: str) -> Reply:
         """save reply to db and collect links to related replies if they exist"""
@@ -73,12 +53,6 @@ class OpenAiChatCompleter(BaseService):
             answer=answer,
             previous_reply=previous_reply,
         )
-
-    @cached_property
-    def open_ai_client_completion(self) -> Type[openai.ChatCompletion]:
-        openai.api_key = OpenAiTokenGetter()()
-
-        return openai.ChatCompletion
 
     @cached_property
     def question(self) -> str:
@@ -101,11 +75,3 @@ class OpenAiChatCompleter(BaseService):
         if not self.valid_messages_for_creating_reply_with_link:
             return None
         return self.current_messages[-2]["content"]
-
-    def get_validators(self) -> list[Callable]:
-        return [self.validate_last_message_is_question]
-
-    def validate_last_message_is_question(self) -> None:
-        last_message = self.current_messages[-1]
-        if last_message["role"] != "user":
-            raise OpenAiChatCompleterException("Last message must be question from user")

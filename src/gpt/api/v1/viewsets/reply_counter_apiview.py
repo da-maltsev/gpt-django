@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from gpt.api.v1.serializers import ReplyCounterSerializer
-from gpt.services.openai_usages_counter import OpenAiUsagesCounter
+from gpt.services.openai import OpenAiUsagesCounter
 
 
 @extend_schema_view(

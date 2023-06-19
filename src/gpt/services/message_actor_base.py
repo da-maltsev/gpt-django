@@ -6,7 +6,7 @@ from django.contrib.sessions.backends.base import SessionBase
 from django.utils.functional import cached_property
 
 from app.services import BaseService
-from gpt.services.openai_usages_counter import OpenAiUsagesCounter
+from gpt.services.openai.openai_usages_counter import OpenAiUsagesCounter
 from users.models import User
 
 
