@@ -290,6 +290,7 @@ pytest==7.2.1
     #   pytest-django
     #   pytest-env
     #   pytest-freezegun
+    #   pytest-lazy-fixture
     #   pytest-mock
     #   pytest-randomly
 pytest-deadfixtures==2.2.1
@@ -299,6 +300,8 @@ pytest-django==4.5.2
 pytest-env==0.8.1
     # via gpt-django (pyproject.toml)
 pytest-freezegun==0.4.2
+    # via gpt-django (pyproject.toml)
+pytest-lazy-fixture==0.6.3
     # via gpt-django (pyproject.toml)
 pytest-mock==3.10.0
     # via gpt-django (pyproject.toml)
@@ -347,6 +350,8 @@ traitlets==5.9.0
 types-freezegun==1.1.10
     # via gpt-django (pyproject.toml)
 types-pillow==9.4.0.6
+    # via gpt-django (pyproject.toml)
+types-pytest-lazy-fixture==0.6.3.3
     # via gpt-django (pyproject.toml)
 types-pytz==2022.7.1.0
     # via django-stubs

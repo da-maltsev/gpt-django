@@ -18,3 +18,7 @@ class ReplySerializer(serializers.ModelSerializer):
             "status",
             "created",
         )
+
+
+class ReplyCounterSerializer(serializers.Serializer):
+    count = serializers.IntegerField(min_value=0, read_only=True)

@@ -4,26 +4,19 @@ pytestmark = [
     pytest.mark.django_db,
 ]
 
-BASE_URL: str = "/api/v1/replies/"
 
-
-@pytest.fixture
-def url() -> str:
-    return BASE_URL
-
-
-def test_without_entities(as_user, url):
-    got = as_user.get(url)
+def test_without_entities(as_user, url_list):
+    got = as_user.get(url_list)
 
     assert got["results"] == []
 
 
-def test_have_required_fields(as_user, url, reply, factory, user):
+def test_have_required_fields(as_user, url_list, reply, factory, user):
     reply.previous_reply = factory.reply()
     factory.reply(previous_reply=reply)
     reply.save()
 
-    got = as_user.get(url)["results"][0]
+    got = as_user.get(url_list)["results"][0]
 
     assert got["uuid"] == str(reply.uuid)
     assert got["question"] == str(reply.question)
@@ -33,9 +26,9 @@ def test_have_required_fields(as_user, url, reply, factory, user):
     assert got["status"] == reply.status
 
 
-def test_num_queries(as_user, django_assert_num_queries, user, factory, url):
+def test_num_queries(as_user, django_assert_num_queries, user, factory, url_list):
     factory.cycle(6).reply(author=user)
     factory.reply()
 
     with django_assert_num_queries(3):
-        as_user.get(url)
+        as_user.get(url_list)
