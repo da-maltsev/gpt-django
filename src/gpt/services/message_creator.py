@@ -4,6 +4,7 @@ from typing import final
 from gpt.models import Reply
 from gpt.services.message_actor_base import MessageActorBase
 from gpt.services.openai import OpenAiChatter
+from gpt.services.openai import OpenAiChatterException
 from users.models import User
 
 
@@ -40,7 +41,10 @@ class MessageCreator(MessageActorBase):
 
     def ask_open_ai(self) -> str:
         """call the openai API and get formatted response"""
-        return OpenAiChatter(messages=self.session["messages"])()
+        try:
+            return OpenAiChatter(messages=self.session["messages"])()
+        except OpenAiChatterException as e:
+            raise MessageCreatorException(e)
 
     def add_response_to_message_list(self) -> None:
         """append the response to the messages list"""
