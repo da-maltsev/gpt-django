@@ -65,6 +65,7 @@ dev = [
     "flake8-pytest",
     "flake8-pytest-style",
     "flake8-simplify",
+    "flake8-tidy-imports",
     "flake8-todo",
     "flake8-use-fstring",
     "flake8-variables-names",
@@ -93,6 +94,12 @@ ignore = [
     "SIM113",  # Use enumerate instead of manually incrementing a counter
     "E203",  # whitespace before ':', disabled for black purposes https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#slices
 ]
+banned-modules = """
+    typing.Optional = Please use "x | None"
+    typing.Union = Please use "x | y"
+    typing.List = Please use "list" instead of "List"
+    typing.Dict = Please use "dict" instead of "Dict"
+"""
 exclude = [
     "static",
     "migrations",
