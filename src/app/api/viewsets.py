@@ -1,4 +1,4 @@
-from typing import Any, Optional, Protocol, Type
+from typing import Any, Protocol, Type
 
 from rest_framework import mixins
 from rest_framework.response import Response
@@ -62,7 +62,7 @@ class ResponseWithRetrieveSerializerMixin:
         retrieve_serializer = retrieve_serializer_class(instance, context=context)
         return Response(retrieve_serializer.data, status=status, headers=headers)
 
-    def get_serializer_class(self: BaseGenericViewSet, action: Optional[str] = None) -> Type[BaseSerializer]:
+    def get_serializer_class(self: BaseGenericViewSet, action: str | None = None) -> Type[BaseSerializer]:
         if action is None:
             action = self.action  # type: ignore
 

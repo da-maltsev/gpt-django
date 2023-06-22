@@ -144,6 +144,7 @@ flake8==5.0.4
     #   flake8-pyproject
     #   flake8-pytest
     #   flake8-simplify
+    #   flake8-tidy-imports
     #   flake8-use-fstring
     #   flake8-walrus
 flake8-absolute-import==1.0.0.1
@@ -179,6 +180,8 @@ flake8-pytest==1.4
 flake8-pytest-style==1.6.0
     # via gpt-django (pyproject.toml)
 flake8-simplify==0.19.3
+    # via gpt-django (pyproject.toml)
+flake8-tidy-imports==4.9.0
     # via gpt-django (pyproject.toml)
 flake8-todo==0.7
     # via gpt-django (pyproject.toml)
