@@ -1,17 +1,16 @@
 from typing import Any
 
+from app.api.viewsets import ReadonlyModelViewSet
 from drf_spectacular.utils import extend_schema
+from gpt.api.v1.filtersets import ReplyFilterSet
+from gpt.api.v1.serializers import ReplySerializer
+from gpt.models import Reply
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from django.db.models import QuerySet
-
-from app.api.viewsets import ReadonlyModelViewSet
-from gpt.api.v1.filtersets import ReplyFilterSet
-from gpt.api.v1.serializers import ReplySerializer
-from gpt.models import Reply
 
 
 @extend_schema(tags=["replies"])

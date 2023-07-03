@@ -1,5 +1,4 @@
 from rest_framework_jwt.settings import api_settings
-
 from users.models import User
 
 

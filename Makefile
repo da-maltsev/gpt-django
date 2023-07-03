@@ -11,19 +11,19 @@ dev-deps: deps
 	pip-compile --resolver=backtracking --extra=dev --output-file=dev-requirements.txt pyproject.toml
 
 fmt:
-	cd src && autoflake --in-place --remove-all-unused-imports --recursive .
-	cd src && isort .
-	cd src && black .
+	cd backend && autoflake --in-place --remove-all-unused-imports --recursive .
+	cd backend && isort .
+	cd backend && black .
 
 lint:
-	dotenv-linter src/app/.env.ci
-	cd src && ./manage.py check
-	flake8 src
-	cd src && mypy
+	dotenv-linter backend/app/.env.ci
+	cd backend && ./manage.py check
+	flake8 backend
+	cd backend && mypy
 
 test:
-	mkdir -p src/static
-	cd src && ./manage.py makemigrations --dry-run --no-input --check
-	cd src && ./manage.py compilemessages
-	cd src && pytest --dead-fixtures
-	cd src && pytest -x
+	mkdir -p backend/static
+	cd backend && ./manage.py makemigrations --dry-run --no-input --check
+	cd backend && ./manage.py compilemessages
+	cd backend && pytest --dead-fixtures
+	cd backend && pytest -x

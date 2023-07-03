@@ -1,15 +1,14 @@
 from dataclasses import dataclass
 from typing import Callable, final, Type
 
-import openai
-from openai import OpenAIError
-
-from django.utils.functional import cached_property
-
 from app.exceptions import AppServiceException
 from app.services import BaseService
 from gpt.models import OpenAiProfile
 from gpt.services.openai.openai_token_getter import OpenAiTokenGetter
+import openai
+from openai import OpenAIError
+
+from django.utils.functional import cached_property
 
 TEMPERATURE = 0.1  # at this moment it's fine to always use default temperature
 TIMEOUT = 25

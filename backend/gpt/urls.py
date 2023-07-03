@@ -1,9 +1,9 @@
 # here we are import path from in-built django-urls
 # here we are importing all the Views from the views.py file
 
-from django.urls import path
-
 from gpt.api import views
+
+from django.urls import path
 
 app_name = "gpt"
 # a list of all the urls

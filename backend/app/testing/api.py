@@ -4,7 +4,6 @@ import string
 
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient as DRFAPIClient
-
 from users.models import User
 
 

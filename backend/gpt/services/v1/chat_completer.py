@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from typing import final
 
-from django.utils.functional import cached_property
-
 from app.services import BaseService
 from gpt.models import Reply
 from gpt.services.openai import OpenAiChatter
 from users.models import User
+
+from django.utils.functional import cached_property
 
 
 @final

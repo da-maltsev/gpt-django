@@ -24,7 +24,7 @@ RUN wget -O uwsgi-${_UWSGI_VERSION}.tar.gz https://github.com/unbit/uwsgi/archiv
 
 RUN pip install --upgrade pip
 
-ADD ../requirements.txt /
+ADD requirements.txt /
 RUN pip install --no-cache-dir -r /requirements.txt
 
 WORKDIR /backend

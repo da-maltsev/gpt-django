@@ -1,12 +1,21 @@
 # importing the openai API
 from typing import Any
 
+from gpt.api.throttle import AnonGETGptRateThrottle
+from gpt.api.throttle import AnonPOSTGptRateThrottle
+from gpt.api.throttle import UserGETGptRateThrottle
+from gpt.api.throttle import UserPOSTGptRateThrottle
+from gpt.models import Reply
+from gpt.services import MessageCreator
+from gpt.services import MessageCreatorException
+from gpt.services import MessageDisplayer
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.decorators import authentication_classes
 from rest_framework.decorators import permission_classes
 from rest_framework.decorators import throttle_classes
 from rest_framework.permissions import AllowAny
+from users.models import User
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import AnonymousUser
@@ -17,16 +26,6 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.generic import DetailView
 from django.views.generic import ListView
-
-from gpt.api.throttle import AnonGETGptRateThrottle
-from gpt.api.throttle import AnonPOSTGptRateThrottle
-from gpt.api.throttle import UserGETGptRateThrottle
-from gpt.api.throttle import UserPOSTGptRateThrottle
-from gpt.models import Reply
-from gpt.services import MessageCreator
-from gpt.services import MessageCreatorException
-from gpt.services import MessageDisplayer
-from users.models import User
 
 
 class ReplyListView(LoginRequiredMixin, ListView):

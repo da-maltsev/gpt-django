@@ -1,6 +1,6 @@
-from django.urls import path
-
 from a12n.api import views
+
+from django.urls import path
 
 app_name = "a12n"
 urlpatterns = [

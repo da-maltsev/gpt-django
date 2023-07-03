@@ -1,7 +1,6 @@
 import pytest
 
 from freezegun import freeze_time
-
 from gpt.models import Reply
 
 pytestmark = [

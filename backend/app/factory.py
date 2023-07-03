@@ -1,11 +1,10 @@
 from io import BytesIO
 
+from app.testing import register
+from app.testing.types import FactoryProtocol
 from PIL import Image
 
 from django.core.files.uploadedfile import SimpleUploadedFile
-
-from app.testing import register
-from app.testing.types import FactoryProtocol
 
 
 @register

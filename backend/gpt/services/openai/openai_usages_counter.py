@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from typing import final
 
-from django.db.models.aggregates import Sum
-
 from app.services import BaseService
 from gpt.models import OpenAiProfile
+
+from django.db.models.aggregates import Sum
 
 
 @final

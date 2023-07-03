@@ -1,6 +1,5 @@
-from rest_framework import serializers
-
 from gpt.definitions import OPENAI_ROLES
+from rest_framework import serializers
 
 
 class ChatMessageSerializer(serializers.Serializer):

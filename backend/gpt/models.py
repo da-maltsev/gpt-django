@@ -1,8 +1,8 @@
 import uuid
 
-from django.db import models
-
 from app.models import TimestampedModel
+
+from django.db import models
 
 
 class ReplyQuerySet(models.QuerySet):

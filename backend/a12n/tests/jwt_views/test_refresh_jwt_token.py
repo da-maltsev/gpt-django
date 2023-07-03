@@ -1,8 +1,7 @@
 import pytest
 
-from freezegun import freeze_time
-
 from a12n.utils import get_jwt
+from freezegun import freeze_time
 
 pytestmark = [
     pytest.mark.django_db,

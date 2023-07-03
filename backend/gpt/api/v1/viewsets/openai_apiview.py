@@ -2,15 +2,14 @@ from typing import Any
 
 from drf_spectacular.utils import extend_schema
 from drf_spectacular.utils import extend_schema_view
-from rest_framework import status
-from rest_framework.request import Request
-from rest_framework.response import Response
-from rest_framework.views import APIView
-
 from gpt.api.throttle import AnonPOSTGptRateThrottle
 from gpt.api.throttle import UserPOSTGptRateThrottle
 from gpt.api.v1.serializers import ChatSerializer
 from gpt.services.v1 import ChatCompleter
+from rest_framework import status
+from rest_framework.request import Request
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from users.models import User
 
 

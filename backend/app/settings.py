@@ -2,9 +2,8 @@
 #
 # Settings are split into multiple files using http://github.com/sobolevn/django-split-settings
 
-from split_settings.tools import include
-
 from app.conf.environ import env
+from split_settings.tools import include
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("SECRET_KEY")

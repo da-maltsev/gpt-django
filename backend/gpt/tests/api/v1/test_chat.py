@@ -1,9 +1,8 @@
 import pytest
 
-from rest_framework import status
-
 from gpt.models import Reply
 from gpt.services.openai import OpenAiChatterException
+from rest_framework import status
 
 pytestmark = [
     pytest.mark.django_db,

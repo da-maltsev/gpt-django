@@ -1,7 +1,7 @@
-from django.contrib import admin
-
 from gpt.models import OpenAiProfile
 from gpt.models import Reply
+
+from django.contrib import admin
 
 
 @admin.register(Reply)

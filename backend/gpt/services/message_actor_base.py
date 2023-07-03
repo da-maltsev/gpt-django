@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 from typing import Any
 
-from django.contrib.auth.models import AnonymousUser
-from django.contrib.sessions.backends.base import SessionBase
-from django.utils.functional import cached_property
-
 from app.services import BaseService
 from gpt.services.openai.openai_usages_counter import OpenAiUsagesCounter
 from users.models import User
+
+from django.contrib.auth.models import AnonymousUser
+from django.contrib.sessions.backends.base import SessionBase
+from django.utils.functional import cached_property
 
 
 @dataclass

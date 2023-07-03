@@ -1,6 +1,5 @@
-from rest_framework.throttling import AnonRateThrottle
-
 from app.api.throttling import ConfigurableThrottlingMixin
+from rest_framework.throttling import AnonRateThrottle
 
 
 class AuthAnonRateThrottle(ConfigurableThrottlingMixin, AnonRateThrottle):

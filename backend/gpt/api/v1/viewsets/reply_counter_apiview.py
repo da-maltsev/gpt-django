@@ -2,13 +2,12 @@ from typing import Any
 
 from drf_spectacular.utils import extend_schema
 from drf_spectacular.utils import extend_schema_view
+from gpt.api.v1.serializers import ReplyCounterSerializer
+from gpt.services.openai import OpenAiUsagesCounter
 from rest_framework import status
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from gpt.api.v1.serializers import ReplyCounterSerializer
-from gpt.services.openai import OpenAiUsagesCounter
 
 
 @extend_schema_view(

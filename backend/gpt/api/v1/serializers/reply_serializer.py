@@ -1,6 +1,5 @@
-from rest_framework import serializers
-
 from gpt.models import Reply
+from rest_framework import serializers
 
 
 class ReplySerializer(serializers.ModelSerializer):

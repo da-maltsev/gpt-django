@@ -1,6 +1,6 @@
-from django.urls import path
-
 from users.api import viewsets
+
+from django.urls import path
 
 app_name = "users"
 urlpatterns = [
