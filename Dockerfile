@@ -27,8 +27,8 @@ RUN pip install --upgrade pip
 ADD requirements.txt /
 RUN pip install --no-cache-dir -r /requirements.txt
 
-WORKDIR /src
-ADD src /src
+WORKDIR /backend
+ADD backend /backend
 
 RUN ./manage.py compilemessages
 RUN ./manage.py collectstatic --noinput
@@ -38,4 +38,4 @@ ARG RELEASE=dev-untagged
 
 USER nobody
 
-CMD sh -c "./manage.py migrate && uwsgi --master --http 0.0.0.0:8000 --module app.wsgi --workers 2 --threads 2 --harakiri 25 --max-requests 500 --log-x-forwarded-for --buffer-size 32000"]
+CMD sh -c "./manage.py migrate && uwsgi --master --http 0.0.0.0:8000 --module app.wsgi --workers 2 --threads 2 --harakiri 25 --max-requests 500 --log-x-forwarded-for --buffer-size 32000"

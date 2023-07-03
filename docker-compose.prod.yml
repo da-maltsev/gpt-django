@@ -30,6 +30,13 @@ services:
       - db
     restart: unless-stopped
 
+  frontend:
+    image: ghcr.io/da-maltsev/gpt-django-front:latest
+    container_name: frontend
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
 
 volumes:
   postgres_data:
