@@ -114,3 +114,4 @@ venv
 backend/static
 .env
 db.sqlite
+.DS_Store

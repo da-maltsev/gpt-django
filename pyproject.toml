@@ -25,6 +25,7 @@ dependencies = [
     "six",
     "django-allauth",
     "django-jazzmin",
+    "django-cors-headers",
 ]
 
 
