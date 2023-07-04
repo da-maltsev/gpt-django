@@ -15,6 +15,7 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "rest_framework_jwt.blacklist",
     "django_filters",
+    "corsheaders",
     "axes",
     "django.contrib.sites",
     "django.contrib.admin",

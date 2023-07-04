@@ -48,6 +48,8 @@ django==4.1.9
     #   drf-spectacular
     #   drf-spectacular-sidecar
     #   gpt-django (pyproject.toml)
+django-cors-headers==4.1.0
+    # via gpt-django (pyproject.toml)
 django-allauth==0.54.0
     # via gpt-django (pyproject.toml)
 django-axes==5.40.1
