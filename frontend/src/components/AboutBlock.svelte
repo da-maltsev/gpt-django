@@ -1,12 +1,10 @@
 <script>
+	import { AccordionItem } from '@skeletonlabs/skeleton';
 	export let block;
 </script>
 
-<div class="flex space-x-2">
-	<div class="basis-1/3">
-		<h2 class="h2 text-left">{block.header}</h2>
-	</div>
-	<div class="basis-2/3">
-		<p class="text-left">{block.content}</p>
-	</div>
-</div>
+<AccordionItem>
+	<!--		<svelte:fragment slot="lead">(icon)</svelte:fragment>-->
+	<svelte:fragment slot="summary"><h2 class="h2 text-center">{block.header}</h2></svelte:fragment>
+	<svelte:fragment slot="content"><p class="text-center">{block.content}</p></svelte:fragment>
+</AccordionItem>

@@ -8,7 +8,6 @@ export default defineConfig({
 	},
 	server: {
 		port: 8080,
-		host: 'localhost',
-		protocol: 'ws'
+		host: 'localhost'
 	}
 });

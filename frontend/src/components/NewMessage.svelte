@@ -4,7 +4,8 @@
 	import { addLineBreaks } from '../utils/lineBreaker.js';
 
 	const dispatch = createEventDispatcher();
-	const maxlength = 1000;
+	const maxlength = 2000;
+	const LINE_LENGTH = 35;
 
 	export let disabled = false;
 	let currentMessage = '';
@@ -28,7 +29,9 @@
 
 	function autoResizeTextarea(event) {
 		const textarea = event.target.value;
-		rows = Math.floor(textarea.length / 100) + 1;
+		let rows_on_length = Math.floor(textarea.length / LINE_LENGTH) + 1;
+		let rows_on_breaks = textarea.split('\n').length;
+		rows = rows_on_length > rows_on_breaks ? rows_on_length : rows_on_breaks;
 	}
 </script>
 

@@ -1,5 +1,6 @@
 <script>
 	import AboutBlock from '../../components/AboutBlock.svelte';
+	import { Accordion } from '@skeletonlabs/skeleton';
 
 	const blocks = [
 		{
@@ -21,10 +22,9 @@
 </script>
 
 <div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-10 text-center flex flex-col items-center">
-		<h1 class="h1 my-20">Про сайт</h1>
+	<Accordion>
 		{#each blocks as block}
 			<AboutBlock {block} />
 		{/each}
-	</div>
+	</Accordion>
 </div>

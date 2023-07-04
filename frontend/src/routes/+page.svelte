@@ -9,7 +9,6 @@
 	import UsageCount from '../components/UsageCount.svelte';
 
 	$messageStore;
-
 	$: messages = $messageStore;
 
 	let disableNewMessage = false;
@@ -82,7 +81,7 @@
 			on:newMessage={handleNewMessage}
 			on:newMessage={sendChatMessage}
 		/>
-		<button type="button" class="btn variant-ringed-tertiary" on:click={handleRemoveMessages}
+		<button type="button" class="btn variant-ghost-tertiary" on:click={handleRemoveMessages}
 			>Начнем по новой</button
 		>
 	</div>
