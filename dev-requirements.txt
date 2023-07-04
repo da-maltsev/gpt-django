@@ -68,6 +68,7 @@ django==4.1.9
     # via
     #   django-allauth
     #   django-axes
+    #   django-cors-headers
     #   django-filter
     #   django-healthchecks
     #   django-jazzmin
@@ -84,6 +85,8 @@ django-allauth==0.54.0
 django-axes==5.40.1
     # via gpt-django (pyproject.toml)
 django-behaviors==0.5.1
+    # via gpt-django (pyproject.toml)
+django-cors-headers==4.1.0
     # via gpt-django (pyproject.toml)
 django-environ==0.9.0
     # via gpt-django (pyproject.toml)

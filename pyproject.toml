@@ -81,6 +81,9 @@ dev = [
     "types-pytest-lazy-fixture",
 ]
 
+[tool.setuptools]
+py-modules = ["backend"]
+
 
 [tool.flake8]
 max-line-length = 160

@@ -28,7 +28,7 @@
 </script>
 
 {#if usageCount > 0 && !hidden}
-	<span class="badge variant-tertiary" on:click={hideElement}
+	<span class="badge variant-tertiary card-hover" on:click={hideElement}
 		>уже было получено: {usageCount} ответов</span
 	>
 {/if}
