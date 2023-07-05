@@ -1,7 +1,6 @@
 <script>
 	import Reply from '../components/Reply.svelte';
 	import NewMessage from '../components/NewMessage.svelte';
-	import { addLineBreaks } from '../utils/lineBreaker.js';
 	import { post } from '../utils/client.js';
 	import { Modal, modalStore } from '@skeletonlabs/skeleton';
 	import { ProgressBar } from '@skeletonlabs/skeleton';
@@ -46,14 +45,11 @@
 			if (response.ok) {
 				const data = await response.json();
 				console.log(data);
-
-				let lastMessage = data.messages.at(-1);
-				lastMessage.content = addLineBreaks(lastMessage.content);
-				messages = [...messages, lastMessage];
+				messages = [...data.messages];
 				messageStore.set(messages);
 			} else {
 				handleBadResponse();
-				console.error('Error:', response);
+				console.error('BadResponse:', response);
 			}
 		} catch (error) {
 			handleBadResponse();
@@ -67,7 +63,7 @@
 <Modal />
 
 <div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-10 text-center flex flex-col items-center">
+	<div class="space-y-10 flex flex-col items-center">
 		<h2 class="h2">Привет, давай общаться!</h2>
 		<UsageCount />
 		{#each messages as message}
