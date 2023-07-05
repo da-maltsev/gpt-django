@@ -1,7 +1,6 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 	import { is_empty } from 'svelte/internal';
-	import { addLineBreaks } from '../utils/lineBreaker.js';
 
 	const dispatch = createEventDispatcher();
 	const maxlength = 2000;

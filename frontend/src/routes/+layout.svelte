@@ -7,6 +7,13 @@
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
+	import Navbar from '../components/Navbar.svelte';
+
+	let hiddenTrail = false;
+
+	function handleNavbarToggle() {
+		hiddenTrail = !hiddenTrail;
+	}
 </script>
 
 <!-- App Shell -->
@@ -15,23 +22,20 @@
 		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<strong class="text-xl uppercase"><a href="/" rel="noreferrer">Web assistant</a></strong>
-
-				<a href="/about" rel="noreferrer" class="ms-5 text-xl uppercase">Про сайт</a>
-				<a href="/login" rel="noreferrer" class="ms-5 text-xl uppercase pointer-events-none"
-					>Авторизоваться</a
-				>
+				<Navbar on:navbarToggle={handleNavbarToggle} />
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<LightSwitch />
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://github.com/da-maltsev/gpt-django"
-					target="_blank"
-					rel="noreferrer"
-				>
-					GitHub
-				</a>
+				{#if !hiddenTrail}
+					<LightSwitch />
+					<a
+						class="btn btn-sm variant-ghost-surface"
+						href="https://github.com/da-maltsev/gpt-django"
+						target="_blank"
+						rel="noreferrer"
+					>
+						GitHub
+					</a>
+				{/if}
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>

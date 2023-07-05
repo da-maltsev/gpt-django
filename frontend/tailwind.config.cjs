@@ -8,10 +8,11 @@ module.exports = {
 	darkMode: 'class',
 	content: [
 		'./src/**/*.{html,js,svelte,ts}',
+		'./node_modules/flowbite/**/*.js',
 		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
 	],
 	theme: {
 		extend: {}
 	},
-	plugins: [forms, typography, ...skeleton()]
+	plugins: [forms, typography, ...skeleton(), require('flowbite/plugin')]
 };

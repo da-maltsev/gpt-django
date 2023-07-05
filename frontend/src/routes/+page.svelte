@@ -1,7 +1,6 @@
 <script>
 	import Reply from '../components/Reply.svelte';
 	import NewMessage from '../components/NewMessage.svelte';
-	import { addLineBreaks } from '../utils/lineBreaker.js';
 	import { post } from '../utils/client.js';
 	import { Modal, modalStore } from '@skeletonlabs/skeleton';
 	import { ProgressBar } from '@skeletonlabs/skeleton';
@@ -10,29 +9,6 @@
 
 	$messageStore;
 	$: messages = $messageStore;
-	// $: messages = [
-	// 	{
-	// 		role: 'user',
-	// 		content:
-	// 			'const \nmodalBadResponse = {\n' +
-	// 			"\t\ttype: 'alert',\n" +
-	// 			"\t\ttitle: 'Что-то пошло не так'," +
-	// 			"\t\tbody: 'Попро\nбуйте переформулировать вопрос или попробуйте позже.'," +
-	// 			"\t\timage: 'https://media.tenor.com/rtKFHEGpoPwAAAAM/meme-lang.gif'" +
-	// 			'\t};const <pre>modalBadResponse = {' +
-	// 			"\t\ttype: 'alert'," +
-	// 			"\t\ttitle: 'Что-то пошло не так'," +
-	// 			"\t\tbody: 'Попробуйте переформулировать вопрос или попробуйте позже.'," +
-	// 			"\t\timage: 'https://med</pre>ia.tenor.com/rtKFHEGpoPwAAAAM/meme-lang.gif'" +
-	// 			'\t};' +
-	// 			'\t};const modalBadResponse = {' +
-	// 			"\t\ttype: 'alert'," +
-	// 			"\t\ttitle: 'Что-то пошло не так'," +
-	// 			"\t\tbody: 'Попробуйте переформулировать вопрос или попробуйте позже.'," +
-	// 			"\t\timage: 'https://media.tenor.com/rtKFHEGpoPwAAAAM/meme-lang.gif'" +
-	// 			'\t};'
-	// 	}
-	// ];
 
 	let disableNewMessage = false;
 
@@ -62,7 +38,7 @@
 			console.log(messages);
 			disableNewMessage = true;
 
-			const response = await post('https://urf4cknmt.space/api/v1/chat/', {
+			const response = await post('/api/v1/chat/', {
 				messages: messages
 			});
 
@@ -73,7 +49,7 @@
 				messageStore.set(messages);
 			} else {
 				handleBadResponse();
-				console.error('Error:', response);
+				console.error('BadResponse:', response);
 			}
 		} catch (error) {
 			handleBadResponse();
