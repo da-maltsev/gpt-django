@@ -14,11 +14,9 @@
 
 	function addMessage() {
 		if (!isEmpty) {
-			let messageWithBreaks = addLineBreaks(currentMessage);
-
 			const newMessage = {
 				role: 'user',
-				content: messageWithBreaks
+				content: currentMessage
 			};
 			currentMessage = '';
 			rows = 1;

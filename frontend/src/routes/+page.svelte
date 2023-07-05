@@ -10,6 +10,29 @@
 
 	$messageStore;
 	$: messages = $messageStore;
+	// $: messages = [
+	// 	{
+	// 		role: 'user',
+	// 		content:
+	// 			'const \nmodalBadResponse = {\n' +
+	// 			"\t\ttype: 'alert',\n" +
+	// 			"\t\ttitle: 'Что-то пошло не так'," +
+	// 			"\t\tbody: 'Попро\nбуйте переформулировать вопрос или попробуйте позже.'," +
+	// 			"\t\timage: 'https://media.tenor.com/rtKFHEGpoPwAAAAM/meme-lang.gif'" +
+	// 			'\t};const <pre>modalBadResponse = {' +
+	// 			"\t\ttype: 'alert'," +
+	// 			"\t\ttitle: 'Что-то пошло не так'," +
+	// 			"\t\tbody: 'Попробуйте переформулировать вопрос или попробуйте позже.'," +
+	// 			"\t\timage: 'https://med</pre>ia.tenor.com/rtKFHEGpoPwAAAAM/meme-lang.gif'" +
+	// 			'\t};' +
+	// 			'\t};const modalBadResponse = {' +
+	// 			"\t\ttype: 'alert'," +
+	// 			"\t\ttitle: 'Что-то пошло не так'," +
+	// 			"\t\tbody: 'Попробуйте переформулировать вопрос или попробуйте позже.'," +
+	// 			"\t\timage: 'https://media.tenor.com/rtKFHEGpoPwAAAAM/meme-lang.gif'" +
+	// 			'\t};'
+	// 	}
+	// ];
 
 	let disableNewMessage = false;
 
@@ -39,17 +62,14 @@
 			console.log(messages);
 			disableNewMessage = true;
 
-			const response = await post('/api/v1/chat/', {
+			const response = await post('https://urf4cknmt.space/api/v1/chat/', {
 				messages: messages
 			});
 
 			if (response.ok) {
 				const data = await response.json();
 				console.log(data);
-
-				let lastMessage = data.messages.at(-1);
-				lastMessage.content = addLineBreaks(lastMessage.content);
-				messages = [...messages, lastMessage];
+				messages = [...data.messages];
 				messageStore.set(messages);
 			} else {
 				handleBadResponse();
@@ -67,7 +87,7 @@
 <Modal />
 
 <div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-10 text-center flex flex-col items-center">
+	<div class="space-y-10 flex flex-col items-center">
 		<h2 class="h2">Привет, давай общаться!</h2>
 		<UsageCount />
 		{#each messages as message}

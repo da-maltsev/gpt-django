@@ -8,8 +8,8 @@
 
 	let divClass = isUser ? 'grid grid-cols-[1fr_auto] gap-2' : 'grid grid-cols-[auto_1fr] gap-2';
 	let contentClass = isUser
-		? 'card p-4 rounded-tr-none space-y-2 variant-soft-primary  card-hover'
-		: 'card p-4 variant-soft rounded-tl-none space-y-2  card-hover';
+		? 'container card p-4 rounded-tr-none space-y-2 variant-soft-primary  card-hover'
+		: 'container card p-4 variant-soft rounded-tl-none space-y-2  card-hover';
 
 	function textCopiedAlert() {
 		visible = true;
@@ -24,7 +24,9 @@
 		</aside>
 	{/if}
 	<div class={contentClass}>
-		<pre use:clickToCopy on:click={textCopiedAlert}>{message.content}</pre>
+		<pre class="whitespace-pre-wrap" use:clickToCopy on:click={textCopiedAlert}>
+			{message.content.replace(/\r\n/g, '<br/>')}
+		</pre>
 	</div>
 	{#if visible && !isUser}
 		<aside class="alert variant-ghost" transition:fade|local={{ duration: 200 }}>
