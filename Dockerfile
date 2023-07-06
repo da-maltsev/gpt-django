@@ -1,5 +1,5 @@
-
-FROM python:3.11.3-slim-bullseye
+ARG PYTHON_VERSION
+FROM python:${PYTHON_VERSION}-slim-bullseye as base
 
 ENV PYTHONUNBUFFERED 1
 ENV DEBIAN_FRONTEND noninteractive
