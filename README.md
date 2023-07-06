@@ -50,7 +50,7 @@ $ ./manage.py createsuperuser
 $ ./manage.py runserver
 ```
 
-### If you prefer develop from container
+### If you prefer develop from container or need it for frontend
 
 Run the docker-compose:
 
