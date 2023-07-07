@@ -9,6 +9,8 @@
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import Navbar from '../components/Navbar.svelte';
 
+	export const ssr = false;
+
 	let hiddenTrail = false;
 
 	function handleNavbarToggle() {
