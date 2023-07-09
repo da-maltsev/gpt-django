@@ -14,16 +14,9 @@ CI = env("CI", cast=bool, default=False)
 
 SITE_ID = 1
 
-PYGMENTS_FORMATTERS = {
-    "html": "pygments.formatters.HtmlFormatter",
-}
-
-PYGMENTS_STYLE = "default"
-
 include(
     "conf/api.py",
     "conf/auth.py",
-    "conf/all_auth.py",
     "conf/boilerplate.py",
     "conf/db.py",
     "conf/healthchecks.py",
@@ -38,5 +31,4 @@ include(
     "conf/templates.py",
     "conf/timezone.py",
     "conf/openai.py",
-    "conf/cors.py",
 )

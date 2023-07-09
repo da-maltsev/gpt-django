@@ -8,7 +8,6 @@ AXES_ENABLED = env("AXES_ENABLED", cast=bool, default=True)
 AUTHENTICATION_BACKENDS = [
     "axes.backends.AxesBackend",
     "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
 JWT_AUTH = {

@@ -7,8 +7,6 @@ api = [
 ]
 
 urlpatterns = [
-    path("accounts/", include("allauth.urls")),
     path("admin/", admin.site.urls),
     path("api/", include(api)),
-    path("", include("gpt.urls")),
 ]
