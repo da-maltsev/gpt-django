@@ -3,3 +3,5 @@ backend/static/
 .circleci/
 db.sqlite
 __pycache__/
+node_modules
+*/node_modules

@@ -21,6 +21,7 @@
 	];
 </script>
 
+<title>About</title>
 <div class="container h-full mx-auto flex justify-center items-center">
 	<Accordion>
 		{#each blocks as block}
