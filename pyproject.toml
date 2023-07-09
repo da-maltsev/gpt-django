@@ -14,7 +14,6 @@ dependencies = [
     "djangorestframework-camel-case",
     "drf-jwt",
     "drf-spectacular[sidecar]",
-    "drf_social_oauth2",
     "django-filter",
     "django-split-settings",
     "django-healthchecks",
@@ -25,6 +24,7 @@ dependencies = [
     "openai",
     "six",
     "django-jazzmin",
+    "social-auth-app-django",
 ]
 
 

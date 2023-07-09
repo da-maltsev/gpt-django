@@ -31,4 +31,5 @@ include(
     "conf/templates.py",
     "conf/timezone.py",
     "conf/openai.py",
+    "conf/social_auth.py",
 )

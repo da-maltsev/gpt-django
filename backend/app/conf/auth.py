@@ -1,13 +1,16 @@
 from datetime import timedelta
 
 from app.conf.environ import env
+from app.conf.social_auth import SOCIAL_AUTH_BACKENDS
 
 AUTH_USER_MODEL = "users.User"
 AXES_ENABLED = env("AXES_ENABLED", cast=bool, default=True)
 
 AUTHENTICATION_BACKENDS = [
-    "axes.backends.AxesBackend",
+    # "axes.backends.AxesBackend",
     "django.contrib.auth.backends.ModelBackend",
+
+    *SOCIAL_AUTH_BACKENDS,
 ]
 
 JWT_AUTH = {
