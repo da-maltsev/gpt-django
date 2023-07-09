@@ -1,14 +1,11 @@
-FROM node:18.16-alpine
+FROM node:20.1-bullseye-slim
 
 WORKDIR /frontend
 
-COPY package*.json .
-
-RUN npm install
-
 COPY . ./
 
-RUN npm run build
+RUN rm -rf node_modules && rm -f package-lock.json
+RUN npm install && npm run build
 
 EXPOSE 8080
 

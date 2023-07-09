@@ -2,6 +2,14 @@ version: '3'
 
 services:
 
+  nginx:
+    container_name: nginx
+    image: ghcr.io/da-maltsev/nginx-gpt-dev:latest
+    ports:
+      - 80:80
+    restart: always
+
+
   db:
     container_name: postgres
     image: postgres:13.2-alpine
@@ -15,7 +23,7 @@ services:
     restart: unless-stopped
 
   app:
-    image: ghcr.io/da-maltsev/gpt-django:latest
+    build: .
     container_name: backend
     environment:
       - DATABASE_URL=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db/${POSTGRES_DB:-postgres}
@@ -24,12 +32,25 @@ services:
     command: >
       sh -c "./manage.py migrate &&
              ./manage.py runserver 0.0.0.0:8000"
-    ports:
-      - 8000:8000
     depends_on:
       - db
+      - nginx
     volumes:
       - ./backend:/backend
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./frontend
+    container_name: frontend
+    command: >
+      sh -c "npm run dev"
+    depends_on:
+      - db
+      - nginx
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules/
     restart: unless-stopped
 
 volumes:

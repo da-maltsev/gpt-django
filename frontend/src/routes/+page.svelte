@@ -60,6 +60,7 @@
 	}
 </script>
 
+<title>Web assistant</title>
 <Modal />
 
 <div class="container h-full mx-auto flex justify-center items-center">

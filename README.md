@@ -1,20 +1,19 @@
 # Gpt-django
 
 It's some sort of pet-project. The main purpose is to give access to interaction with ChatGPT for my friends and relatives.
-So it's actualy simple django project with templates. 
+So it's actualy simple django project with DRF and SvelteKit for frontend. 
 
 At this moment it's hosted on https://urf4cknmt.space
 
 # What's next?
 
-It would be great to keep Django just as backend using DRF and create some modern frontend with React/Vue/Svelte. 
-I'm kinda lame in frontend stuff, so I've made it with ChatGPT and I know it looks ugly 😅
+Frontend is made now with SvelteKit. I don't know much Svelte, but I like it enough 😅
 
 Feel free to make pull requests if you have any enhancement both for backend and frontend parts.
 
 # Django project
 
-This project is bootstrapped using [fandsdev/django](http://github.com/fandsdev/django) template.
+This project backend is bootstrapped using [fandsdev/django](http://github.com/fandsdev/django) template.
 
 ## Project structure
 
@@ -25,6 +24,46 @@ The main django app is called `app`. It contains `.env` file for django-environ.
 Django user model is located in the separate `users` app.
 
 Also, feel free to add as much django apps as you want.
+
+### If you prefer develop from container or need it for frontend
+
+Run the docker-compose:
+
+```bash
+$ cp .env.example .env  # default environment variables
+$ cd src && cp app/.env.ci app/.env  # default environment variables
+$ docker-compose up -d
+$ docker-compose exec app bash  # entering backend
+$ ./manage.py createsuperuser  # creating admin user
+```
+There is volume between your and container src directories, so just do what you want.
+
+Don't forget to run tests inside app container in such case.
+
+
+### Testing:
+#### For backend
+```bash
+# run formatter
+$ make fmt
+
+# run lint
+$ make lint
+
+# run unit tests
+$ make test
+```
+#### For frontend
+```bash
+# run formatter
+$ npm format
+
+# run lint
+$ npm lint
+
+# run unit tests
+$ npm test:unit
+```
 
 ## Installing on a local machine
 This project requires python 3.11. Deps are managed by [pip-tools](https://github.com/jazzband/pip-tools)
@@ -48,41 +87,6 @@ $ cd src && cp app/.env.ci app/.env  # default environment variables
 $ ./manage.py migrate
 $ ./manage.py createsuperuser
 $ ./manage.py runserver
-```
-
-### If you prefer develop from container or need it for frontend
-
-Run the docker-compose:
-
-```bash
-$ cp .env.example .env  # default environment variables
-$ cd src && cp app/.env.ci app/.env  # default environment variables
-$ docker-compose up -d
-$ docker-compose exec app bash
-$ ./manage.py createsuperuser
-```
-There is volume between your and container src directories, so just do what you want.
-
-Don't forget to run tests inside app container in such case.
-
-
-### Testing:
-```bash
-# run formatter
-$ make fmt
-
-# run lint
-$ make lint
-
-# run unit tests
-$ make test
-```
-
-Development servers:
-
-```bash
-$ ./manage.py runserver
-
 ```
 
 ## Backend Code requirements
