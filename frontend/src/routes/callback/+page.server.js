@@ -1,17 +1,4 @@
-import { tokenStore } from '../../utils/tokenStore.js';
 import { redirect } from '@sveltejs/kit';
-import { get as getFromStore } from 'svelte/store';
-
-let token = getFromStore(tokenStore);
-// let headers =
-// 	token.length > 5
-// 		? {
-// 				'Content-Type': 'application/json',
-// 				Authorization: `Bearer ${token}`
-// 		  }
-// 		: {
-// 				'Content-Type': 'application/json'
-// 		  };
 
 const tokenURL = 'https://oauth.vk.com/access_token';
 
@@ -24,14 +11,18 @@ const redirectUri = `${host}/callback`;
 const clientId = import.meta.env.VITE_VK_CLIENT_ID;
 const secret = import.meta.env.VITE_VK_SECRET;
 
-export async function load({ params, url }) {
+export async function load({ params, url, cookies }) {
 	const code = url.searchParams.get('code');
 	const accessToken = await getAccessToken(code);
 	const apiToken = await getUser(accessToken);
 
-	console.log(apiToken.token);
-	tokenStore.set(apiToken.token);
-	console.log(getFromStore(tokenStore));
+	cookies.set('token', apiToken.token, {
+		httpOnly: false,
+		sameSite: 'strict',
+		secure: false,
+		path: '/',
+		maxAge: 60 * 60 * 24 * 7
+	});
 }
 
 function getAccessToken(code) {

@@ -1,12 +1,5 @@
-import { get as getFromStore } from 'svelte/store';
-import { tokenStore } from './tokenStore.js';
-
-let token;
-tokenStore.subscribe(($tokenStore) => (token = $tokenStore));
-console.log('TOKEN SUBSCRIBE  ' + token);
-
-let headers =
-	token.length > 5
+function getHeaders(token = '') {
+	return token.length > 5
 		? {
 				'Content-Type': 'application/json',
 				Authorization: `Token ${token}`
@@ -14,12 +7,10 @@ let headers =
 		: {
 				'Content-Type': 'application/json'
 		  };
+}
 
-console.log(headers);
-
-export async function post(url, body) {
-	console.log('SDASDASDASDASD');
-	console.log(headers);
+export async function post(url, body, token = '') {
+	const headers = getHeaders(token);
 	return await fetch(url, {
 		method: 'POST',
 		headers: headers,
@@ -27,7 +18,8 @@ export async function post(url, body) {
 	});
 }
 
-export async function get(url) {
+export async function get(url, token = '') {
+	const headers = getHeaders(token);
 	return await fetch(url, {
 		method: 'GET',
 		headers: headers

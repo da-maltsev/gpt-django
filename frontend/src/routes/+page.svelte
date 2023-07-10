@@ -6,9 +6,12 @@
 	import { ProgressBar } from '@skeletonlabs/skeleton';
 	import { messageStore } from '../utils/messagesStore.js';
 	import UsageCount from '../components/UsageCount.svelte';
-	import { tokenStore } from '../utils/tokenStore.js';
 
-	$tokenStore;
+	let token = document.cookie
+		.split('; ')
+		.find((cookie) => cookie.startsWith('token'))
+		.split('=')[1];
+
 	$messageStore;
 	$: messages = $messageStore;
 
@@ -40,9 +43,13 @@
 			console.log(messages);
 			disableNewMessage = true;
 
-			const response = await post('/api/v1/chat/', {
-				messages: messages
-			});
+			const response = await post(
+				'/api/v1/chat/',
+				{
+					messages: messages
+				},
+				token
+			);
 
 			if (response.ok) {
 				const data = await response.json();
