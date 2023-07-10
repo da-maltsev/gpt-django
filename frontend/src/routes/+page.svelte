@@ -6,7 +6,9 @@
 	import { ProgressBar } from '@skeletonlabs/skeleton';
 	import { messageStore } from '../utils/messagesStore.js';
 	import UsageCount from '../components/UsageCount.svelte';
+	import { tokenStore } from '../utils/tokenStore.js';
 
+	$tokenStore;
 	$messageStore;
 	$: messages = $messageStore;
 

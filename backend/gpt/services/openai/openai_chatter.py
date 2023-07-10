@@ -11,8 +11,8 @@ from openai import OpenAIError
 from django.utils.functional import cached_property
 
 TEMPERATURE = 0.1  # at this moment it's fine to always use default temperature
-TIMEOUT = 25
-MAX_TOKENS = 1000
+TIMEOUT = 45
+MAX_TOKENS = 2000
 EXCEEDED_SUBSCRIPTION_MESSAGE = "You exceeded your current quota, please check your plan and billing details."
 
 
