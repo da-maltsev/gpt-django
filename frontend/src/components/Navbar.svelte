@@ -3,6 +3,8 @@
 
 	const dispatch = createEventDispatcher();
 
+	export let isAuthenticated = false;
+
 	function handleNavbarToggle() {
 		dispatch('navbarToggle', NaN);
 	}
@@ -51,14 +53,25 @@
 						class="whitespace-pre block py-1 pl-1 pr-1 text-xl uppercase">Про сайт</a
 					>
 				</li>
-				<li>
-					<a
-						href="/login"
-						rel="noreferrer"
-						class="whitespace-pre block py-1 pl-1 pr-1 text-xl uppercase pointer-events-none"
-						>Авторизоваться</a
-					>
-				</li>
+				{#if isAuthenticated === false}
+					<li>
+						<a
+							href="/auth"
+							rel="noreferrer"
+							class="whitespace-pre block py-1 pl-1 pr-1 text-xl uppercase">Авторизоваться</a
+						>
+					</li>
+				{/if}
+				{#if isAuthenticated === true}
+					<li>
+						<a
+							href="/replies"
+							rel="noreferrer"
+							class="whitespace-pre block py-1 pl-1 pr-1 text-xl uppercase pointer-events-none"
+							disabled>Мои вопросы и ответы</a
+						>
+					</li>
+				{/if}
 			</ul>
 		</div>
 	</div>

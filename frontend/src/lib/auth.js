@@ -1,3 +1,3 @@
 import { localStorageStore } from '@skeletonlabs/skeleton';
 
-export const tokenStore = localStorageStore('token', '');
+export const user = localStorageStore('token', '');
