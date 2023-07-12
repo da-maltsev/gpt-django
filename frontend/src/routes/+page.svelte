@@ -1,4 +1,5 @@
 <script>
+	import { browser } from '$app/environment';
 	import Reply from '../components/Reply.svelte';
 	import NewMessage from '../components/NewMessage.svelte';
 	import { post } from '../utils/client.js';
@@ -7,10 +8,14 @@
 	import { messageStore } from '../utils/messagesStore.js';
 	import UsageCount from '../components/UsageCount.svelte';
 
-	let token = document.cookie
-		.split('; ')
-		.find((cookie) => cookie.startsWith('token'))
-		.split('=')[1];
+	// $: token = browser
+	// 	? document.cookie
+	// 			.split('; ')
+	// 			.find((cookie) => cookie.startsWith('token'))
+	// 			.split('=')[1]
+	// 	: '';
+
+	$: token = '';
 
 	$messageStore;
 	$: messages = $messageStore;
