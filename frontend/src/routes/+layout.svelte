@@ -9,7 +9,10 @@
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import Navbar from '../components/Navbar.svelte';
 
-	export const ssr = false;
+	import { user } from '$lib/auth.js';
+	export let data;
+	user.set(data.user);
+	$: $user;
 
 	let hiddenTrail = false;
 
@@ -24,7 +27,7 @@
 		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<Navbar on:navbarToggle={handleNavbarToggle} />
+				<Navbar on:navbarToggle={handleNavbarToggle} isAuthenticated={$user.isAuthenticated} />
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				{#if !hiddenTrail}

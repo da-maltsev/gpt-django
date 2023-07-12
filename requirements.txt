@@ -32,14 +32,16 @@ charset-normalizer==3.0.1
     #   aiohttp
     #   requests
 cryptography==39.0.0
-    # via pyjwt
+    # via
+    #   pyjwt
+    #   social-auth-core
 defusedxml==0.7.1
-    # via python3-openid
+    # via
+    #   python3-openid
+    #   social-auth-core
 django==4.1.9
     # via
-    #   django-allauth
     #   django-axes
-    #   django-cors-headers
     #   django-filter
     #   django-healthchecks
     #   django-jazzmin
@@ -49,13 +51,10 @@ django==4.1.9
     #   drf-spectacular
     #   drf-spectacular-sidecar
     #   gpt-django (pyproject.toml)
-django-allauth==0.54.0
-    # via gpt-django (pyproject.toml)
+    #   social-auth-app-django
 django-axes==5.40.1
     # via gpt-django (pyproject.toml)
 django-behaviors==0.5.1
-    # via gpt-django (pyproject.toml)
-django-cors-headers==4.1.0
     # via gpt-django (pyproject.toml)
 django-environ==0.9.0
     # via gpt-django (pyproject.toml)
@@ -103,7 +102,9 @@ multidict==6.0.4
     #   aiohttp
     #   yarl
 oauthlib==3.2.2
-    # via requests-oauthlib
+    # via
+    #   requests-oauthlib
+    #   social-auth-core
 openai==0.27.7
     # via gpt-django (pyproject.toml)
 pillow==9.4.0
@@ -114,12 +115,12 @@ pycparser==2.21
     # via cffi
 pyjwt[crypto]==2.6.0
     # via
-    #   django-allauth
     #   drf-jwt
+    #   social-auth-core
 pyrsistent==0.19.3
     # via jsonschema
 python3-openid==3.2.0
-    # via django-allauth
+    # via social-auth-core
 pytz==2022.7.1
     # via djangorestframework
 pyyaml==6.0
@@ -128,16 +129,20 @@ redis==4.4.2
     # via gpt-django (pyproject.toml)
 requests==2.28.2
     # via
-    #   django-allauth
     #   django-healthchecks
     #   openai
     #   requests-oauthlib
+    #   social-auth-core
 requests-oauthlib==1.3.1
-    # via django-allauth
+    # via social-auth-core
 sentry-sdk==1.14.0
     # via gpt-django (pyproject.toml)
 six==1.16.0
     # via gpt-django (pyproject.toml)
+social-auth-app-django==5.2.0
+    # via gpt-django (pyproject.toml)
+social-auth-core==4.4.2
+    # via social-auth-app-django
 sqlparse==0.4.3
     # via django
 tqdm==4.65.0

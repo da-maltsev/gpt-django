@@ -29,6 +29,8 @@ services:
       - DATABASE_URL=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db/${POSTGRES_DB:-postgres}
       - SECRET_KEY=${SECRET_KEY}
       - OPENAI_TOKEN=${OPENAI_TOKEN}
+      - SOCIAL_AUTH_VK_OAUTH2_KEY=${VK_OAUTH2_KEY}
+      - SOCIAL_AUTH_VK_OAUTH2_SECRET=${VK_OAUTH2_SECRET}
     command: >
       sh -c "./manage.py migrate &&
              ./manage.py runserver 0.0.0.0:8000"
@@ -43,6 +45,10 @@ services:
     build:
       context: ./frontend
     container_name: frontend
+    environment:
+      - VITE_VK_CLIENT_ID=${VK_OAUTH2_KEY}
+      - VITE_VK_SECRET=${VK_OAUTH2_SECRET}
+      - VITE_HOST=${HOST}
     command: >
       sh -c "npm run dev"
     depends_on:

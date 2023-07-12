@@ -1,7 +1,8 @@
 <script>
-	import { get } from '../utils/client.js';
+	import { get } from '$lib/client.js';
 	import { onMount } from 'svelte';
 
+	export let token = '';
 	$: usageCount = 0;
 	$: hidden = false;
 
@@ -11,7 +12,7 @@
 
 	async function getUsageCount() {
 		try {
-			const response = await get('/api/v1/replies/count/');
+			const response = await get('/api/v1/replies/count/', token);
 			console.log(response);
 			if (response.ok) {
 				const data = await response.json();

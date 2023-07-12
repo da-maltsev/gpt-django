@@ -23,9 +23,8 @@ dependencies = [
     "psycopg2-binary",
     "openai",
     "six",
-    "django-allauth",
     "django-jazzmin",
-    "django-cors-headers",
+    "social-auth-app-django",
 ]
 
 

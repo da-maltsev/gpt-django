@@ -1,5 +1,5 @@
 <script>
-	import { clickToCopy } from '../utils/clickToCopy.js';
+	import { clickToCopy } from '$lib/clickToCopy.js';
 	import { fade } from 'svelte/transition';
 	export let message = { role: 'assistant', content: 'Попробуйте задать любой вопрос.' };
 

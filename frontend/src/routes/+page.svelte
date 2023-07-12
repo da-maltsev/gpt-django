@@ -1,11 +1,17 @@
 <script>
+	import { browser } from '$app/environment';
 	import Reply from '../components/Reply.svelte';
 	import NewMessage from '../components/NewMessage.svelte';
-	import { post } from '../utils/client.js';
+	import { post } from '$lib/client';
 	import { Modal, modalStore } from '@skeletonlabs/skeleton';
 	import { ProgressBar } from '@skeletonlabs/skeleton';
-	import { messageStore } from '../utils/messagesStore.js';
+	import { messageStore } from '$lib/messagesStore';
 	import UsageCount from '../components/UsageCount.svelte';
+	import { user } from '$lib/auth.js';
+
+	export let data;
+	user.set(data.user);
+	$: $user;
 
 	$messageStore;
 	$: messages = $messageStore;
@@ -23,7 +29,10 @@
 		messages = [...messages, event.detail];
 	}
 
-	function handleRemoveMessages() {
+	async function handleRemoveMessages() {
+		if ($user.isAuthenticated === true) {
+			await post('api/v1/replies/status/archived/', {}, $user.token);
+		}
 		messageStore.set('');
 	}
 
@@ -38,13 +47,16 @@
 			console.log(messages);
 			disableNewMessage = true;
 
-			const response = await post('/api/v1/chat/', {
-				messages: messages
-			});
+			const response = await post(
+				'/api/v1/chat/',
+				{
+					messages: messages
+				},
+				$user.token
+			);
 
 			if (response.ok) {
 				const data = await response.json();
-				console.log(data);
 				messages = [...data.messages];
 				messageStore.set(messages);
 			} else {
@@ -66,7 +78,7 @@
 <div class="container h-full mx-auto flex justify-center items-center">
 	<div class="space-y-10 flex flex-col items-center">
 		<h2 class="h2">Привет, давай общаться!</h2>
-		<UsageCount />
+		<UsageCount token={$user.token} />
 		{#each messages as message}
 			<Reply {message} />
 		{/each}
@@ -78,8 +90,10 @@
 			on:newMessage={handleNewMessage}
 			on:newMessage={sendChatMessage}
 		/>
-		<button type="button" class="btn variant-ghost-tertiary" on:click={handleRemoveMessages}
-			>Начнем по новой</button
-		>
+		{#if messages.length > 1}
+			<button type="button" class="btn variant-ghost-tertiary" on:click={handleRemoveMessages}
+				>Начнем по новой</button
+			>
+		{/if}
 	</div>
 </div>

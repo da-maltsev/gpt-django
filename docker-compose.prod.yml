@@ -21,6 +21,8 @@ services:
       - DATABASE_URL=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db/${POSTGRES_DB:-postgres}
       - SECRET_KEY=${SECRET_KEY}
       - OPENAI_TOKEN=${OPENAI_TOKEN}
+      - SOCIAL_AUTH_VK_OAUTH2_KEY=${VK_OAUTH2_KEY}
+      - SOCIAL_AUTH_VK_OAUTH2_SECRET=${VK_OAUTH2_SECRET}
     command: >
       sh -c "./manage.py migrate &&
              uwsgi --master --http 0.0.0.0:8000 --module app.wsgi --workers 1 --threads 2 --harakiri 30 --max-requests 500 --log-x-forwarded-for --buffer-size 32000"
@@ -33,6 +35,10 @@ services:
   frontend:
     image: ghcr.io/da-maltsev/gpt-django-front:latest
     container_name: frontend
+    environment:
+      - VITE_VK_CLIENT_ID=${VK_OAUTH2_KEY}
+      - VITE_VK_SECRET=${VK_OAUTH2_SECRET}
+      - VITE_HOST=${HOST}
     ports:
       - 8080:8080
     restart: unless-stopped
