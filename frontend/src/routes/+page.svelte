@@ -1,5 +1,4 @@
 <script>
-	import { browser } from '$app/environment';
 	import Reply from '../components/Reply.svelte';
 	import NewMessage from '../components/NewMessage.svelte';
 	import { post } from '$lib/client';
@@ -21,7 +20,7 @@
 	const modalBadResponse = {
 		type: 'alert',
 		title: 'Что-то пошло не так',
-		body: 'Попробуйте переформулировать вопрос или попробуйте позже.',
+		body: 'Попробуйте переформулировать вопрос или попробуйте позже. (Если все совсем плохо - очистите кеш и куки)',
 		image: 'https://media.tenor.com/rtKFHEGpoPwAAAAM/meme-lang.gif'
 	};
 
@@ -90,10 +89,8 @@
 			on:newMessage={handleNewMessage}
 			on:newMessage={sendChatMessage}
 		/>
-		{#if messages.length > 1}
-			<button type="button" class="btn variant-ghost-tertiary" on:click={handleRemoveMessages}
-				>Начнем по новой</button
-			>
-		{/if}
+		<button type="button" class="btn variant-ghost-tertiary" on:click={handleRemoveMessages}
+			>Начнем по новой</button
+		>
 	</div>
 </div>

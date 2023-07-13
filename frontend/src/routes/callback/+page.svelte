@@ -5,8 +5,8 @@
 </script>
 
 <div class="container h-full mx-auto flex justify-center items-center">
+	<h2 class="h2">Прекрасно, ты авторизовался. Теперь продолжим общение!</h2>
 	<div class="space-y-10 flex flex-col items-center">
-		<h2 class="h2">Прекрасно, ты авторизовался. Теперь продолжим общение!</h2>
 		<a
 			bind:this={goAuthorized}
 			href="/"

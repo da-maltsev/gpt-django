@@ -43,6 +43,7 @@
 					<a
 						href="/"
 						rel="noreferrer"
+						target="_self"
 						class="whitespace-pre block py-1 pl-1 pr-1 font-bold text-xl uppercase">Web assistant</a
 					>
 				</li>
