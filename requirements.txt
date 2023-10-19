@@ -149,7 +149,7 @@ tqdm==4.65.0
     # via openai
 uritemplate==4.1.1
     # via drf-spectacular
-urllib3==1.26.17
+urllib3==1.26.18
     # via
     #   requests
     #   sentry-sdk
