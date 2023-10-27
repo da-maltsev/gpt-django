@@ -9,6 +9,6 @@ if TYPE_CHECKING:
 
 
 class User(AbstractUser):
-    objects = _UserManager()  # type: _UserManager
+    objects = _UserManager()  # type: ignore
 
     replies: models.QuerySet["Reply"]

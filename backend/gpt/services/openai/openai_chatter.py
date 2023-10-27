@@ -53,7 +53,7 @@ class OpenAiChatter(BaseService):
             temperature=TEMPERATURE,
             max_tokens=MAX_TOKENS,
             request_timeout=TIMEOUT,
-        )
+        )  # type: ignore
         return response["choices"][0]["message"]["content"]
 
     @cached_property
