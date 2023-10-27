@@ -9,9 +9,7 @@ pytestmark = [pytest.mark.django_db]
 
 @pytest.fixture(autouse=True)
 def _require_users_app_installed(settings):
-    assert apps.is_installed(
-        "users"
-    ), """
+    assert apps.is_installed("users"), """
         Stock f213/django users app should be installed to run this test.
 
         Make sure to test app.middleware.real_ip.real_ip_middleware on your own, if you drop

@@ -40,9 +40,9 @@ dev = [
     "pytest-randomly",
     "pytest-lazy-fixture",
 
-    "black",
-
-    "autoflake==1.7.0",
+    "ruff",
+    "isort",
+    "flake8-tidy-imports",
 
     "dotenv-linter",
 
@@ -50,27 +50,6 @@ dev = [
     "mixer",
 
     "jedi",
-    "flake8-absolute-import",
-    "flake8-black",
-    "flake8-bugbear",
-    "flake8-cognitive-complexity",
-    "flake8-django",
-    "flake8-eradicate",
-    "flake8-isort>=4.0.0",
-    "flake8-fixme",
-    "flake8-pep3101",
-    "flake8-pie",
-    "flake8-print",
-    "flake8-printf-formatting",
-    "flake8-pytest",
-    "flake8-pytest-style",
-    "flake8-simplify",
-    "flake8-tidy-imports",
-    "flake8-todo",
-    "flake8-use-fstring",
-    "flake8-variables-names",
-    "flake8-walrus",
-    "flake8-pyproject",
 
     "mypy",
     "django-stubs",
@@ -84,25 +63,8 @@ dev = [
 py-modules = ["backend"]
 
 
-[tool.flake8]
-max-line-length = 160
-inline-quotes = "\""
-ignore = [
-    "DJ05",  # URLs include() should set a namespace
-    "E501",  # Line too long
-    "E265",  # Block comments should have one space before the pound sign (#) and the comment itself
-    "F811",  # Redefinition of unused name from line n
-    "PT001",  # Use @pytest.fixture() over @pytest.fixture
-    "SIM102",  # Use a single if-statement instead of nested if-statements
-    "SIM113",  # Use enumerate instead of manually incrementing a counter
-    "E203",  # whitespace before ':', disabled for black purposes https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#slices
-]
-banned-modules = """
-    typing.Optional = Please use "x | None"
-    typing.Union = Please use "x | y"
-    typing.List = Please use "list" instead of "List"
-    typing.Dict = Please use "dict" instead of "Dict"
-"""
+[tool.ruff]
+line-length = 160
 exclude = [
     "static",
     "migrations",
@@ -111,25 +73,32 @@ exclude = [
     "__pycache__",
 ]
 
+[tool.ruff.pydocstyle]
+convention = "google"
 
-[tool.isort]
-profile = "google"
-line_length = 160
-extra_standard_library = ["pytest"]
-known_django = ["django", "restframework"]
-sections = ["FUTURE", "STDLIB", "THIRDPARTY", "DJANGO", "FIRSTPARTY", "LOCALFOLDER"]
-use_parentheses = true
-include_trailing_comma = true
-multi_line_output = 3
+[tool.ruff.lint]
+ignore = [
+    "E501",  # Line too long
+    "E265",  # Block comments should have one space before the pound sign (#) and the comment itself
+    "F811",  # Redefinition of unused name from line n
+    "PT001",  # Use @pytest.fixture() over @pytest.fixture
+    "SIM102",  # Use a single if-statement instead of nested if-statements
+    "E203",  # whitespace before ':', disabled for black purposes https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#slices
+]
 
+[tool.ruff.lint.flake8-tidy-imports]
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+    "typing.Optional".msg = 'Please use "x | None"'
+    "typing.Union".msg = 'Please use "x | y"'
+    "typing.List".msg = 'Please use "list" instead of "List"'
+    "typing.Dict".msg = 'Please use "dict" instead of "Dict"'
 
-[tool.black]
-exclude = '''
-/(
-  | migrations
-)/
-'''
-line_length = 160
+[tool.roof.isort]
+extra-standard-library = ["pytest"]
+force-single-line = true
+force-sort-within-sections = true
+single-line-exclusions = ["typing"]
+order-by-type = false
 
 
 [tool.pytest.ini_options]
