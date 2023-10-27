@@ -11,14 +11,13 @@ dev-deps: deps
 	pip-compile --resolver=backtracking --extra=dev --output-file=dev-requirements.txt pyproject.toml
 
 fmt:
-	cd backend && autoflake --in-place --remove-all-unused-imports --recursive .
-	cd backend && isort .
-	cd backend && black .
+	ruff format backend
+	ruff check backend --fix
 
 lint:
 	dotenv-linter backend/app/.env.ci
 	cd backend && ./manage.py check
-	ruff backend
+	ruff check backend
 	cd backend && mypy
 
 test:

@@ -41,10 +41,8 @@ dev = [
     "pytest-lazy-fixture",
 
     "ruff",
-
-    "black",
-
-    "autoflake==1.7.0",
+    "isort",
+    "flake8-tidy-imports",
 
     "dotenv-linter",
 
@@ -65,14 +63,6 @@ dev = [
 py-modules = ["backend"]
 
 
-[tool.flake8]
-banned-modules = """
-    typing.Optional = Please use "x | None"
-    typing.Union = Please use "x | y"
-    typing.List = Please use "list" instead of "List"
-    typing.Dict = Please use "dict" instead of "Dict"
-"""
-
 [tool.ruff]
 line-length = 160
 exclude = [
@@ -82,6 +72,9 @@ exclude = [
     ".git",
     "__pycache__",
 ]
+
+[tool.ruff.pydocstyle]
+convention = "google"
 
 [tool.ruff.lint]
 ignore = [
@@ -93,28 +86,19 @@ ignore = [
     "E203",  # whitespace before ':', disabled for black purposes https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#slices
 ]
 
-[tool.ruff.lint.flake8-quotes]
-docstring-quotes = "double"
+[tool.ruff.lint.flake8-tidy-imports]
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+    "typing.Optional".msg = 'Please use "x | None"'
+    "typing.Union".msg = 'Please use "x | y"'
+    "typing.List".msg = 'Please use "list" instead of "List"'
+    "typing.Dict".msg = 'Please use "dict" instead of "Dict"'
 
-
-[tool.isort]
-profile = "google"
-line_length = 160
-extra_standard_library = ["pytest"]
-known_django = ["django", "restframework"]
-sections = ["FUTURE", "STDLIB", "THIRDPARTY", "DJANGO", "FIRSTPARTY", "LOCALFOLDER"]
-use_parentheses = true
-include_trailing_comma = true
-multi_line_output = 3
-
-
-[tool.black]
-exclude = '''
-/(
-  | migrations
-)/
-'''
-line_length = 160
+[tool.roof.isort]
+extra-standard-library = ["pytest"]
+force-single-line = true
+force-sort-within-sections = true
+single-line-exclusions = ["typing"]
+order-by-type = false
 
 
 [tool.pytest.ini_options]
