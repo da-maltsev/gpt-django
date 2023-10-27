@@ -18,7 +18,7 @@ fmt:
 lint:
 	dotenv-linter backend/app/.env.ci
 	cd backend && ./manage.py check
-	flake8 backend
+	ruff backend
 	cd backend && mypy
 
 test:
