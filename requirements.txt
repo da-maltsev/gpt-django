@@ -38,7 +38,7 @@ defusedxml==0.8.0rc2
     # via
     #   python3-openid
     #   social-auth-core
-django==4.1.12
+django==4.1.13
     # via
     #   django-axes
     #   django-filter
