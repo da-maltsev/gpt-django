@@ -43,7 +43,7 @@ click==8.1.7
     #   dotenv-linter
 click-default-group==1.2.4
     # via dotenv-linter
-cryptography==41.0.5
+cryptography==41.0.6
     # via
     #   pyjwt
     #   social-auth-core
