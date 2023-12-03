@@ -1,10 +1,18 @@
 from dataclasses import dataclass
 from typing import Callable, final, Type
 
+from django.db.models import F
+from dataclasses import dataclass
+from typing import final
+
+from app.services import BaseService
+from gpt.models import OpenAiProfile
+
+from django.conf import settings
+from django.db.models import F
 from app.exceptions import AppServiceException
 from app.services import BaseService
 from gpt.models import OpenAiProfile
-from gpt.services.openai.openai_token_getter import OpenAiTokenGetter
 import openai
 from openai import OpenAIError
 
@@ -62,7 +70,12 @@ class OpenAiChatter(BaseService):
 
     @cached_property
     def token(self) -> str:
-        return OpenAiTokenGetter()()
+        active_openai_profile = OpenAiProfile.objects.filter(status=OpenAiProfile.Status.ACTIVE).first()
+        if active_openai_profile:
+            active_openai_profile.usage_count = F("usage_count") + 1
+            active_openai_profile.save()
+            return active_openai_profile.token
+        return settings.OPENAI_TOKEN  # type: ignore[misc]
 
     def get_validators(self) -> list[Callable]:
         return [self.validate_last_message_is_question]

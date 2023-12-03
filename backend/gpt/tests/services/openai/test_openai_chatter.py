@@ -1,5 +1,6 @@
 import pytest
 
+from django.conf import settings
 from gpt.models import OpenAiProfile
 from gpt.services.openai import OpenAiChatter
 from gpt.services.openai import OpenAiChatterException
@@ -57,6 +58,25 @@ def test_act_with_other_error(openai_chatter, mock_chat_completion, openai_profi
 
     openai_profile.refresh_from_db()
     assert openai_profile.status == OpenAiProfile.Status.ACTIVE
+
+
+def test_token_without_active_model(openai_profile, openai_chatter):
+    openai_profile.setattr_and_save("status", "archived")
+
+    result = openai_chatter.token
+
+    assert result == settings.OPENAI_TOKEN
+    assert openai_profile.usage_count == 0
+
+
+def test_token_with_active_model(openai_profile, openai_chatter):
+    openai_profile.setattr_and_save("status", "active")
+
+    result = openai_chatter.token
+
+    openai_profile.refresh_from_db()
+    assert result == openai_profile.token
+    assert openai_profile.usage_count == 1
 
 
 @pytest.mark.parametrize("role", ["assistant", "system"])
