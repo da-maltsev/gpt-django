@@ -1,11 +1,10 @@
+from django.db.models import QuerySet
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 from users.api.serializers import UserSerializer
 from users.models import User
-
-from django.db.models import QuerySet
 
 
 class SelfView(GenericAPIView):

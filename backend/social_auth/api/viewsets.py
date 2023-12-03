@@ -2,8 +2,7 @@ from drf_spectacular.utils import extend_schema
 from requests.exceptions import HTTPError
 from rest_framework import status
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view
-from rest_framework.decorators import permission_classes
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from social_auth.api.serializers import SocialSerializer
@@ -15,9 +14,7 @@ from social_django.utils import psa
 @permission_classes([AllowAny])
 @psa()
 def exchange_token(request, backend):  # type: ignore
-    """
-    Exchange an OAuth2 access token for one for this site.
-    """
+    """Exchange an OAuth2 access token for one for this site."""
     serializer = SocialSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     try:
@@ -28,7 +25,7 @@ def exchange_token(request, backend):  # type: ignore
                 "errors": {
                     "token": "Invalid token",
                     "detail": str(e),
-                }
+                },
             },
             status=status.HTTP_400_BAD_REQUEST,
         )

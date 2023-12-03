@@ -1,9 +1,7 @@
 import pytest
-
 from django.conf import settings
 from gpt.models import OpenAiProfile
-from gpt.services.openai import OpenAiChatter
-from gpt.services.openai import OpenAiChatterException
+from gpt.services.openai import OpenAiChatter, OpenAiChatterException
 from gpt.services.openai.openai_chatter import EXCEEDED_SUBSCRIPTION_MESSAGE
 from openai import OpenAIError
 

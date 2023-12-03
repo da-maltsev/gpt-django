@@ -4,8 +4,7 @@ from app.testing import register
 
 if TYPE_CHECKING:
     from app.testing.types import FactoryProtocol
-    from gpt.models import OpenAiProfile
-    from gpt.models import Reply
+    from gpt.models import OpenAiProfile, Reply
 
 
 @register

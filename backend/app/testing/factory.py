@@ -39,8 +39,7 @@ class FixtureFactory:
         return partial(method, self)
 
     def cycle(self, count: int) -> CycleFixtureFactory:
-        """
-        Run given method X times:
-            factory.cycle(5).order()  # gives 5 orders
+        """Run given method X times:
+        factory.cycle(5).order()  # gives 5 orders
         """
         return CycleFixtureFactory(self, count)

@@ -1,5 +1,4 @@
 import pytest
-
 from app.exceptions import AppServiceException
 from gpt.models import Reply
 from gpt.services.v1 import ChatCompleter

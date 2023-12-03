@@ -1,7 +1,5 @@
-from gpt.models import OpenAiProfile
-from gpt.models import Reply
-
 from django.contrib import admin
+from gpt.models import OpenAiProfile, Reply
 
 
 @admin.register(Reply)

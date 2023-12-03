@@ -1,9 +1,7 @@
 from typing import Any
 
-from drf_spectacular.utils import extend_schema
-from drf_spectacular.utils import extend_schema_view
-from gpt.api.throttle import AnonPOSTGptRateThrottle
-from gpt.api.throttle import UserPOSTGptRateThrottle
+from drf_spectacular.utils import extend_schema, extend_schema_view
+from gpt.api.throttle import AnonPOSTGptRateThrottle, UserPOSTGptRateThrottle
 from gpt.api.v1.serializers import ChatSerializer
 from gpt.services.v1 import ChatCompleter
 from rest_framework import status

@@ -1,10 +1,10 @@
-import pytest
 from typing import TYPE_CHECKING
+
+import pytest
 
 if TYPE_CHECKING:
     from app.testing.factory import FixtureFactory
-    from gpt.models import OpenAiProfile
-    from gpt.models import Reply
+    from gpt.models import OpenAiProfile, Reply
     from users.models import User
 
 
