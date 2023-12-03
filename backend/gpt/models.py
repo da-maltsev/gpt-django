@@ -1,8 +1,8 @@
 import uuid
 
 from app.models import TimestampedModel
-
 from django.db import models
+from django.db.models import Sum
 
 
 class ReplyQuerySet(models.QuerySet):
@@ -33,7 +33,15 @@ class Reply(TimestampedModel):
         ordering = ["-created"]
 
 
+class OpenAiProfileQuerySet(models.QuerySet):
+    def get_usages_count(self) -> int:
+        usages_sum = self.aggregate(Sum("usage_count"))
+        return usages_sum and usages_sum["usage_count__sum"] or 0
+
+
 class OpenAiProfile(TimestampedModel):
+    objects = OpenAiProfileQuerySet.as_manager()
+
     class Status(models.TextChoices):
         ACTIVE = "active", "Active"
         ARCHIVED = "archived", "Archived"

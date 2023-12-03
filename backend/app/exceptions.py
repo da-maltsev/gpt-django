@@ -8,7 +8,6 @@ class AppServiceException(Exception):
 
 def app_service_exception_handler(exc: Exception, context: dict) -> Response | None:
     """Transform service errors to standard 400 errors."""
-
     if not isinstance(exc, AppServiceException):
         return exception_handler(exc, context)
 

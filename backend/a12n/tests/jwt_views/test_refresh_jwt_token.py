@@ -1,5 +1,4 @@
 import pytest
-
 from a12n.utils import get_jwt
 from freezegun import freeze_time
 

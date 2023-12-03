@@ -34,8 +34,7 @@ class BaseGenericViewSet(Protocol):
 
 
 class ResponseWithRetrieveSerializerMixin:
-    """
-    Always response with 'retrieve' serializer or fallback to `serializer_class`.
+    """Always response with 'retrieve' serializer or fallback to `serializer_class`.
     Usage:
 
     class MyViewSet(DefaultModelViewSet):

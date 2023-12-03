@@ -1,8 +1,6 @@
+from django.urls import include, path
 from gpt.api.v1 import viewsets
 from rest_framework.routers import SimpleRouter
-
-from django.urls import include
-from django.urls import path
 
 app_name = "gpt_rest"
 

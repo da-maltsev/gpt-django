@@ -1,6 +1,7 @@
 from typing import Any
 
 from app.api.viewsets import ReadonlyModelViewSet
+from django.db.models import QuerySet
 from drf_spectacular.utils import extend_schema
 from gpt.api.v1.filtersets import ReplyFilterSet
 from gpt.api.v1.serializers import ReplySerializer
@@ -9,8 +10,6 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-
-from django.db.models import QuerySet
 
 
 @extend_schema(tags=["replies"])

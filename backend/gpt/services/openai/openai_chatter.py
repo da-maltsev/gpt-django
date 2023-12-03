@@ -1,14 +1,15 @@
 from dataclasses import dataclass
-from typing import Callable, final, Type
+from typing import Callable, Type, final
 
 from app.exceptions import AppServiceException
 from app.services import BaseService
+from django.conf import settings
+from django.db.models import F
+from django.utils.functional import cached_property
 from gpt.models import OpenAiProfile
-from gpt.services.openai.openai_token_getter import OpenAiTokenGetter
+
 import openai
 from openai import OpenAIError
-
-from django.utils.functional import cached_property
 
 TEMPERATURE = 0.1  # at this moment it's fine to always use default temperature
 TIMEOUT = 45
@@ -46,7 +47,7 @@ class OpenAiChatter(BaseService):
             openai_profile.setattr_and_save("status", OpenAiProfile.Status.ARCHIVED)
 
     def ask_open_ai(self, messages: list[dict]) -> str:
-        """call the openai API and get formatted response"""
+        """Call the openai API and get formatted response"""
         response = self.chat_completion.create(
             model="gpt-3.5-turbo",
             messages=messages,
@@ -62,7 +63,12 @@ class OpenAiChatter(BaseService):
 
     @cached_property
     def token(self) -> str:
-        return OpenAiTokenGetter()()
+        active_openai_profile = OpenAiProfile.objects.filter(status=OpenAiProfile.Status.ACTIVE).first()
+        if active_openai_profile:
+            active_openai_profile.usage_count = F("usage_count") + 1
+            active_openai_profile.save()
+            return active_openai_profile.token
+        return settings.OPENAI_TOKEN  # type: ignore[misc]
 
     def get_validators(self) -> list[Callable]:
         return [self.validate_last_message_is_question]

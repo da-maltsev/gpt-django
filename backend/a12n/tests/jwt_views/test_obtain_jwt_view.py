@@ -1,6 +1,6 @@
 import json
-import pytest
 
+import pytest
 from axes.models import AccessAttempt
 
 pytestmark = pytest.mark.django_db

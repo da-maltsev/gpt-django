@@ -1,5 +1,4 @@
 import pytest
-
 from gpt.models import Reply
 from rest_framework import status
 

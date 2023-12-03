@@ -2,18 +2,16 @@ from dataclasses import dataclass
 from typing import final
 
 from app.services import BaseService
+from django.utils.functional import cached_property
 from gpt.models import Reply
 from gpt.services.openai import OpenAiChatter
 from users.models import User
-
-from django.utils.functional import cached_property
 
 
 @final
 @dataclass
 class ChatCompleter(BaseService):
-    """
-    Gets current messages, and answers to last question
+    """Gets current messages, and answers to last question
     Sends question to OpenAI with context from previous messages
 
     If there is user, saves its messages to db
@@ -34,11 +32,11 @@ class ChatCompleter(BaseService):
         return new_messages
 
     def ask_open_ai(self) -> str:
-        """call the openai API and get formatted response"""
+        """Call the openai API and get formatted response"""
         return OpenAiChatter(self.current_messages)()
 
     def save_reply(self, user: User, question: str, answer: str) -> Reply:
-        """save reply to db and collect links to related replies if they exist"""
+        """Save reply to db and collect links to related replies if they exist"""
         previous_reply = user.replies.first()
 
         if previous_reply and self.valid_messages_for_creating_reply_with_link:
