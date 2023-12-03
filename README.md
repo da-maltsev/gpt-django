@@ -31,7 +31,7 @@ Run the docker-compose:
 
 ```bash
 $ cp .env.example .env  # default environment variables
-$ cd src && cp app/.env.ci app/.env  # default environment variables
+$ cd backend && cp app/.env.ci app/.env  # default environment variables
 $ docker-compose up -d
 $ docker-compose exec app bash  # entering backend
 $ ./manage.py createsuperuser  # creating admin user
@@ -83,7 +83,7 @@ Run the server:
 
 ```bash
 $ cp .env.example .env  # default environment variables
-$ cd src && cp app/.env.ci app/.env  # default environment variables
+$ cd backend && cp app/.env.ci app/.env  # default environment variables
 $ ./manage.py migrate
 $ ./manage.py createsuperuser
 $ ./manage.py runserver
