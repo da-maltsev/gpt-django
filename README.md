@@ -1,3 +1,9 @@
+# 🔴ATTENTION🔴
+Project is deprecated.
+There are a lot of alternatives to ChatGPT, even in Russia. So there is no need in such a proxy.
+
+At least try to create frontend with Svelte was funny 
+
 # Gpt-django
 
 It's some sort of pet-project. The main purpose is to give access to interaction with ChatGPT for my friends and relatives.
