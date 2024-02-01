@@ -1,6 +1,6 @@
 # 🔴ATTENTION🔴
 Project is deprecated.
-There are a lot of alternatives to ChatGPT, even in Russia. So there is no need in such a proxy.
+There are a lot of alternatives to ChatGPT, even in Russia. So there is no need for such a proxy.
 
 At least try to create frontend with Svelte was funny 
 
