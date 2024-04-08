@@ -102,7 +102,7 @@ oauthlib==3.2.2
     #   social-auth-core
 openai==0.28.1
     # via gpt-django (pyproject.toml)
-pillow==10.2.0
+pillow==10.3.0
     # via gpt-django (pyproject.toml)
 psycopg2-binary==2.9.9
     # via gpt-django (pyproject.toml)
