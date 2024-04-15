@@ -262,7 +262,7 @@ social-auth-app-django==5.4.0
     # via gpt-django (pyproject.toml)
 social-auth-core==4.4.2
     # via social-auth-app-django
-sqlparse==0.4.4
+sqlparse==0.5.0
     # via django
 stack-data==0.6.3
     # via ipython
