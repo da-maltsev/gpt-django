@@ -138,30 +138,30 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  deploy:
-    needs: build-docker-image
-    if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Read image identifiers
-        id: image
-        uses: ASzc/change-string-case-action@v1
-        with:
-          string: ${{ github.repository }}
+  # deploy:
+  #   needs: build-docker-image
+  #   if: github.ref == 'refs/heads/master'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Read image identifiers
+  #       id: image
+  #       uses: ASzc/change-string-case-action@v1
+  #       with:
+  #         string: ${{ github.repository }}
 
-      - name: Update image
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USERNAME }}
-          password: ${{ secrets.DEPLOY_PASSWORD }}
-          script: |
-            cd gpt
-            git pull
-            echo "${{ secrets.ENV_FILE }}" > .env
-            docker-compose -f docker-compose.prod.yml pull
-            docker-compose -f docker-compose.prod.yml pull
-            docker-compose -f docker-compose.prod.yml pull
-            docker-compose -f docker-compose.prod.yml up -d
-            docker container prune -f
-            docker image prune -a -f
+  #     - name: Update image
+  #       uses: appleboy/ssh-action@v0.1.7
+  #       with:
+  #         host: ${{ secrets.DEPLOY_HOST }}
+  #         username: ${{ secrets.DEPLOY_USERNAME }}
+  #         password: ${{ secrets.DEPLOY_PASSWORD }}
+  #         script: |
+  #           cd gpt
+  #           git pull
+  #           echo "${{ secrets.ENV_FILE }}" > .env
+  #           docker-compose -f docker-compose.prod.yml pull
+  #           docker-compose -f docker-compose.prod.yml pull
+  #           docker-compose -f docker-compose.prod.yml pull
+  #           docker-compose -f docker-compose.prod.yml up -d
+  #           docker container prune -f
+  #           docker image prune -a -f
