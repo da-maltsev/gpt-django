@@ -140,7 +140,7 @@ sentry-sdk==1.32.0
     # via gpt-django (pyproject.toml)
 six==1.16.0
     # via gpt-django (pyproject.toml)
-social-auth-app-django==5.4.0
+social-auth-app-django==5.4.1
     # via gpt-django (pyproject.toml)
 social-auth-core==4.4.2
     # via social-auth-app-django
