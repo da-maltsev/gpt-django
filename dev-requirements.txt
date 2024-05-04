@@ -266,7 +266,7 @@ sqlparse==0.5.0
     # via django
 stack-data==0.6.3
     # via ipython
-tqdm==4.66.1
+tqdm==4.66.3
     # via openai
 traitlets==5.12.0
     # via
