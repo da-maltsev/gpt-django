@@ -9,7 +9,7 @@ At least try to create frontend with Svelte was funny
 It's some sort of pet-project. The main purpose is to give access to interaction with ChatGPT for my friends and relatives.
 So it's actualy simple django project with DRF and SvelteKit for frontend. 
 
-At this moment it's hosted on https://urf4cknmt.space
+At this moment it's hosted on ~~https://urf4cknmt.space~~
 
 # What's next?
 
